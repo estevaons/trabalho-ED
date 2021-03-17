@@ -13,9 +13,11 @@ char* retornaNomeRot(Roteador* rot);// retorna o nome do roteador
 
 char* retornaOperadoraRot(Roteador* rot);// retorna a operadora do roteador
 
-Roteador* ConectaRoteadores(Roteador* rot1,Roteador* rot2); // Cria um enlace entre o rot1 e o rot2
+ListaRot* retornaEnlaces(Roteador* rot); // retorna a lista dos enlaces do roteador
 
-Roteador* DesconectaRoteadores(Roteador* rot1,Roteador* rot2);// Desfaz um enlace entre o rot1 e o rot2
+void ConectaRoteadores(Roteador* rot1,Roteador* rot2); // Cria um enlace entre o rot1 e o rot2
+
+void DesconectaRoteadores(Roteador* rot1,Roteador* rot2);// Desfaz um enlace entre o rot1 e o rot2
 
 void ImprimeRoteador(Roteador* rot);// imprime o roteador
 

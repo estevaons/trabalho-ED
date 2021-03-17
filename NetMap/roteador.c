@@ -19,6 +19,8 @@ Roteador* CriaRoteador(int id,char* nome,char* operadora){
     rot->nome = strdup(nome);
     rot->operadora = strdup(operadora);
 
+    rot->listaEnlaces = CriaListaRot();
+
     return rot;
 }
 
@@ -34,12 +36,18 @@ char* retornaOperadoraRot(Roteador* rot){
     return rot->operadora;
 }
 
-Roteador* ConectaRoteadores(Roteador* rot1,Roteador* rot2){ // FALTA
-
+ListaRot* retornaEnlaces(Roteador* rot){
+    return rot->listaEnlaces;
 }
 
-Roteador* DesconectaRoteadores(Roteador* rot1,Roteador* rot2){ // FALTA
+void ConectaRoteadores(Roteador* rot1,Roteador* rot2){ 
+    rot1->listaEnlaces = CadastraRoteador(rot2,rot1->listaEnlaces);
+    rot2->listaEnlaces = CadastraRoteador(rot1,rot2->listaEnlaces);
+}
 
+void DesconectaRoteadores(Roteador* rot1,Roteador* rot2){
+    RemoveRoteador(rot1,rot2->listaEnlaces);
+    RemoveRoteador(rot2,rot1->listaEnlaces);
 }
 
 void ImprimeRoteador(Roteador* rot){
