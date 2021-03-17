@@ -9,7 +9,7 @@ ListaTerm* CriaListaTerm();
 
 ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista); // Cadastra um terminal a lista
 
-ListaTerm* RemoveTerminal(Terminal* term); // Remove um terminal da lista
+void RemoveTerminal(Terminal* term,ListaTerm* listaT); // Remove um terminal da lista
 
 void FrequenciaTerminal(ListaTerm* listaT , char* loc); // Imprime a quantidade de terminais cadastrados em uma localização
 

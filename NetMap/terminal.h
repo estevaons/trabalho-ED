@@ -21,6 +21,6 @@ Terminal* DesconectaTerminal(Terminal* term); //  desconecta um terminal de um r
 
 void ImprimeTerminal(Terminal* term); // imprime um terminal
 
-void LiberaTerminal(Terminal* term) // libera um terminal
+void LiberaTerminal(Terminal* term); // libera um terminal
 
 #endif

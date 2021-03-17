@@ -41,7 +41,7 @@ ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista){
     return lista;
 }
 
-ListaTerm* RemoveTerminal(Terminal* term){
+void RemoveTerminal(Terminal* term,ListaTerm* listaT){
     Celula_T* p = listaT->prim;
     Celula_T* ant = NULL;
     int listaVazia = 1;
