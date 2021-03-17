@@ -5,7 +5,9 @@
 
 typedef struct ListaDeTerminais ListaTerm;
 
-ListaTerm* CadastraTerminal(Terminal* term); // Cadastra um terminal a lista
+ListaTerm* CriaListaTerm();
+
+ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista); // Cadastra um terminal a lista
 
 ListaTerm* RemoveTerminal(Terminal* term); // Remove um terminal da lista
 

@@ -15,8 +15,12 @@ char* retornaLocTerm(Terminal* term); // retorna a localizaçao do terminal
 
 Roteador* retornaRotTerm(Terminal* term); // retorna o roteador conectado ao terminal
 
-Terminal* ConectaTerminal(Terminal* term,Roteador* rot);
+Terminal* ConectaTerminal(Terminal* term,Roteador* rot); //  conecta um terminal a um roteador
 
-Terminal* DesconectaTerminal(Terminal* term, Roteador* rot);
+Terminal* DesconectaTerminal(Terminal* term); //  desconecta um terminal de um roteador
+
+void ImprimeTerminal(Terminal* term); // imprime um terminal
+
+void LiberaTerminal(Terminal* term) // libera um terminal
 
 #endif

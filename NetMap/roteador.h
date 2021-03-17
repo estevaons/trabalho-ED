@@ -1,6 +1,8 @@
 #ifndef ROTEADOR_H
 #define ROTEADOR_H
 
+#include "listaRoteadores.h"
+
 typedef struct roteador Roteador;
 
 Roteador* CriaRoteador(int id,char* nome,char* operadora); // Cria um roteador novo

@@ -5,6 +5,8 @@
 
 typedef struct ListaDeRoteadores ListaRot;
 
+ListaRot* CriaListaRot();
+
 ListaRot* CadastraRoteador(Roteador* rot);// Cadastra o roteador na lista de roteadores
 
 ListaRot* RemoveRoteador(Roteador* rot,ListaRot* listaR);// Remove o roteador da lista de roteadores
