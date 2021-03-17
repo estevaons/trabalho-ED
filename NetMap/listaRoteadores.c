@@ -96,7 +96,7 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora){ // Imprime a quantid
     printf("Existem %d roteadores cadastrados da operadora %s.",cont,operadora);
 }
 
-void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores
+void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******ANALISAR DNV temos que imprimir de tras pra frente
     Celula_R* p;
     for(p=listaR->prim;p != NULL;p = p->prox){
         ImprimeRoteador(p->rot);
