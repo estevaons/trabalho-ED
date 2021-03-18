@@ -99,14 +99,17 @@ char* EnviaPacotesDados(Terminal* term1, Terminal* term2){
     Roteador* rot1 = retornaRotTerm(term1);
     Roteador* rot2 = retornaRotTerm(term2);
 
-    ListaRot* listaT1 = retornaEnlaces(rot1);
 
 
-    Celula_T* p;
+    ListaRot* listaROT1 = retornaEnlaces(rot1);
 
-    // for(p = listaT1->prim;p!=NULL;p = p->prox){
 
-    // }
+    Celula_R* p;
+
+
+    for(p = retornaPrim_R(listaROT1) ;p!=NULL;p = retornaProx_R(p)){
+
+    }
 
     
 

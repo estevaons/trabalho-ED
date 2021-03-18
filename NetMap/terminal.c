@@ -17,6 +17,8 @@ Terminal* CriaTerminal(int id,char* nome,char* loc){
     term->id = id;
     term->nome = strdup(nome);
     term->loc = strdup(loc);
+    
+    term->rot = NULL;
 
     return term;
 

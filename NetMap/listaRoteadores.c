@@ -103,6 +103,21 @@ void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******A
     }
 }
 
+
+Celula_R* retornaPrim_R(ListaRot* lista){
+    return lista->prim;
+}
+
+Celula_R* retornaProx_R(Celula_R* cel){
+    return cel->prox;
+}
+
+Celula_R* retornaUlt_R(ListaRot* lista){
+    return lista->ult;
+}
+
+
+
 void LiberaListaRot(ListaRot* listaR){ // Destroi a lista de roteadores
     Celula_R* p = listaR->prim;
     Celula_R* t;

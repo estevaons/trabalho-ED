@@ -3,6 +3,7 @@
 
 #include "roteador.h"
 
+typedef struct celula_r Celula_R;
 typedef struct ListaDeRoteadores ListaRot;
 
 ListaRot* CriaListaRot();
@@ -16,6 +17,12 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora); // Imprime a quantid
 void ImprimeListaRot(ListaRot* listaR);// Printa a lista de roteadores
 
 void LiberaListaRot(ListaRot* listaR);// Destroi a lista de roteadores
+
+Celula_R* retornaPrim_R(ListaRot* lista);
+
+Celula_R* retornaProx_R(Celula_R* cel);
+
+Celula_R* retornaUlt_R(ListaRot* lista);
 
 
 #endif
