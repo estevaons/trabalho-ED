@@ -47,25 +47,34 @@ ListaRot* CadastraRoteador(Roteador* rot,ListaRot* lista){
     return lista;
 }
 
-void RemoveRoteador(Roteador* rot,ListaRot* listaR,FILE* log){
-    Celula_R* p = listaR->prim;
-    Celula_R* ant = NULL;
+Roteador* buscaRoteador(char* nomeRot,ListaRot* lista, FILE* log){
+    Celula_R* p;
+    int existeRot = 0;
     int listaVazia = 1;
 
-    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(rot)){
+    for(p=lista->prim;p!=NULL;p=p->prox){
+        listaVazia = 0;
+        if(strcmp(retornaNomeRot(p->rot),nomeRot)==0){
+            return p->rot;
+            existeRot = 1;
+        }
+    }
+    if(existeRot==0 && listaVazia == 0){
+        fprintf(log,"ERRO: Roteador %s inexistente no NetMap!\n",nomeRot);              
+    }
+
+    else if(listaVazia == 1){
+        fprintf(log,"O NetMap não contém roteadores.\n");       
+    }
+}
+
+void RemoveRoteador(Roteador* rot,ListaRot* listaR){
+    Celula_R* p = listaR->prim;
+    Celula_R* ant = NULL;
+
+    while(p!=NULL && retornaIdRot(p->rot)==retornaIdRot(rot)){
         ant = p;
         p = p->prox;
-        listaVazia = 0;
-    }
-
-    if(p==NULL && listaVazia==0){ // não encontrou o roteador na lista
-        fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",retornaNomeRot(rot));
-        return 0;
-    }
-
-    if(p==NULL && listaVazia==1){ // lista vazia
-        fprintf(log,"O NetMap não contém roteadores.\n");
-        return 0;
     }
 
     if(p == listaR->prim && p == listaR->ult){ // unica celula
@@ -124,20 +133,6 @@ char* EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR){
     }
 
 }
-
-Celula_R* retornaPrim_R(ListaRot* lista){
-    return lista->prim;
-}
-
-Celula_R* retornaProx_R(Celula_R* cel){
-    return cel->prox;
-}
-
-Celula_R* retornaUlt_R(ListaRot* lista){
-    return lista->ult;
-}
-
-
 
 void LiberaListaRot(ListaRot* listaR){ // Destroi a lista de roteadores
     Celula_R* p = listaR->prim;

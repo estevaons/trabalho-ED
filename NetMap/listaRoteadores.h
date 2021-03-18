@@ -10,13 +10,15 @@ ListaRot* CriaListaRot();
 
 ListaRot* CadastraRoteador(Roteador* rot,ListaRot* lista);// Cadastra o roteador na lista de roteadores
 
-ListaRot* RemoveRoteador(Roteador* rot,ListaRot* listaR,FILE* log);// Remove o roteador da lista de roteadores
+ListaRot* RemoveRoteador(Roteador* rot,ListaRot* listaR);// Remove o roteador da lista de roteadores
 
 void FrequenciaOperadora(ListaRot* listaR,char* operadora); // Imprime a quantidade de roteadores cadastrados de uma operadora
 
 void ImprimeListaRot(ListaRot* listaR);// Printa a lista de roteadores
 
 char* EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR); // verifica se é possivel enviar dados do term1 para o term2
+
+Roteador* buscaRoteador(char* nomeRot,ListaRot* lista, FILE* log);
 
 void LiberaListaRot(ListaRot* listaR);// Destroi a lista de roteadores
 
