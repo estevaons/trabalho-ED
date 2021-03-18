@@ -2,8 +2,8 @@
 #define LISTAROTEADORES_H
 
 #include "roteador.h"
+#include "terminal.h"
 
-typedef struct celula_r Celula_R;
 typedef struct ListaDeRoteadores ListaRot;
 
 ListaRot* CriaListaRot();
@@ -16,13 +16,9 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora); // Imprime a quantid
 
 void ImprimeListaRot(ListaRot* listaR);// Printa a lista de roteadores
 
+char* EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR); // verifica se é possivel enviar dados do term1 para o term2
+
 void LiberaListaRot(ListaRot* listaR);// Destroi a lista de roteadores
-
-Celula_R* retornaPrim_R(ListaRot* lista);
-
-Celula_R* retornaProx_R(Celula_R* cel);
-
-Celula_R* retornaUlt_R(ListaRot* lista);
 
 
 #endif

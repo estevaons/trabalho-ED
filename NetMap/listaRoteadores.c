@@ -4,6 +4,7 @@
 
 #include "listaRoteadores.h"
 
+
 typedef struct celula_r Celula_R;
 
 struct celula_r{ // Celula da lista de roteadores
@@ -15,6 +16,7 @@ struct celula_r{ // Celula da lista de roteadores
 struct ListaDeRoteadores{// Sentinela da lista de roteadores
     Celula_R* prim;
     Celula_R* ult;
+    int tamanho;
 };
 
 ListaRot* CriaListaRot(){
@@ -22,6 +24,8 @@ ListaRot* CriaListaRot(){
 
     lista->prim = NULL;
     lista->ult = NULL;
+
+    lista->tamanho = 0;
 
     return lista;
 }
@@ -37,6 +41,8 @@ ListaRot* CadastraRoteador(Roteador* rot,ListaRot* lista){
     if(lista->prim==NULL){
         lista->prim = nova;
     }
+
+    lista->tamanho = lista->tamanho + 1;
 
     return lista;
 }
@@ -103,6 +109,21 @@ void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******A
     }
 }
 
+
+char* EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR){
+    Roteador* rot1 = retornaRotTerm(term1);
+    Roteador* rot2 = retornaRotTerm(term2);
+    char* resposta;
+
+    if(retornaEnlaces(rot1) == NULL || retornaEnlaces(rot2) == NULL){
+        resposta = 'NAO';
+        return resposta;
+    }else{
+        resposta = 'SIM';
+        return resposta;
+    }
+
+}
 
 Celula_R* retornaPrim_R(ListaRot* lista){
     return lista->prim;

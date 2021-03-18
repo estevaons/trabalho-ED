@@ -95,26 +95,7 @@ void FrequenciaTerminal(ListaTerm* listaT , char* loc){
     printf("Existem %d terminais cadastrados em %s.",cont,loc);
 }
 
-char* EnviaPacotesDados(Terminal* term1, Terminal* term2){
-    Roteador* rot1 = retornaRotTerm(term1);
-    Roteador* rot2 = retornaRotTerm(term2);
 
-
-
-    ListaRot* listaROT1 = retornaEnlaces(rot1);
-
-
-    Celula_R* p;
-
-
-    for(p = retornaPrim_R(listaROT1) ;p!=NULL;p = retornaProx_R(p)){
-
-    }
-
-    
-
-
-}
 
 void ImprimeListaTerm(ListaTerm* listaT){
     Celula_T* p;
