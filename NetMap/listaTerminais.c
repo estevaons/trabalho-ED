@@ -41,7 +41,7 @@ ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista){
     return lista;
 }
 
-void RemoveTerminal(Terminal* term,ListaTerm* listaT){
+void RemoveTerminal(Terminal* term,ListaTerm* listaT,FILE* log){
     Celula_T* p = listaT->prim;
     Celula_T* ant = NULL;
     int listaVazia = 1;
@@ -53,12 +53,12 @@ void RemoveTerminal(Terminal* term,ListaTerm* listaT){
     }
 
     if(p==NULL && listaVazia==0){ // não encontrou o terminal na lista
-        printf("Não existe o terminal especificado no NetMap.");
+        fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",retornaNomeTerm(term));
         return 0;
     }
 
     if(p==NULL && listaVazia==1){ // lista vazia
-        printf("O NetMap não contém terminais.");
+        fprintf(log,"O NetMap não contém terminais.\n");
         return 0;
     }
 

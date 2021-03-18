@@ -47,7 +47,7 @@ ListaRot* CadastraRoteador(Roteador* rot,ListaRot* lista){
     return lista;
 }
 
-void RemoveRoteador(Roteador* rot,ListaRot* listaR){
+void RemoveRoteador(Roteador* rot,ListaRot* listaR,FILE* log){
     Celula_R* p = listaR->prim;
     Celula_R* ant = NULL;
     int listaVazia = 1;
@@ -59,12 +59,12 @@ void RemoveRoteador(Roteador* rot,ListaRot* listaR){
     }
 
     if(p==NULL && listaVazia==0){ // não encontrou o roteador na lista
-        printf("Não existe o roteador especificado no NetMap.");
+        fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",retornaNomeRot(rot));
         return 0;
     }
 
     if(p==NULL && listaVazia==1){ // lista vazia
-        printf("O NetMap não contém roteadores.");
+        fprintf(log,"O NetMap não contém roteadores.\n");
         return 0;
     }
 
