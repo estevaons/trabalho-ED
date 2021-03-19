@@ -3,6 +3,7 @@
 
 #include "roteador.h"
 
+
 typedef struct terminal Terminal;
 
 Terminal* CriaTerminal(int id,char* nome,char* loc); // Cria um terminal novo
@@ -13,9 +14,9 @@ char* retornaNomeTerm(Terminal* term); // retorna o nome do terminal
 
 char* retornaLocTerm(Terminal* term); // retorna a localizaçao do terminal
 
-Roteador* retornaRotTerm(Terminal* term); // retorna o roteador conectado ao terminal
+Celula_R* retornaCelRTerm(Terminal* term); // retorna celula de roteador pro terminal
 
-Terminal* ConectaTerminal(Terminal* term,Roteador* rot); //  conecta um terminal a um roteador
+Roteador* retornaRotTerm(Terminal* term); // retorna o roteador conectado ao terminal
 
 void DesconectaTerminal(Terminal* term); //  desconecta um terminal de um roteador
 

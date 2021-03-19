@@ -4,8 +4,8 @@
 
 #include "listaRoteadores.h"
 
+#include "roteador.h"
 
-typedef struct celula_r Celula_R;
 
 struct celula_r{ // Celula da lista de roteadores
     Celula_R* prox;
@@ -19,6 +19,10 @@ struct ListaDeRoteadores{// Sentinela da lista de roteadores
     int tamanho;
 };
 
+Roteador* retornaRot(Celula_R* cel){
+    return cel->rot;
+}
+
 ListaRot* CriaListaRot(){
     ListaRot* lista = (ListaRot*)malloc(sizeof(ListaRot));
 
@@ -30,10 +34,13 @@ ListaRot* CriaListaRot(){
     return lista;
 }
 
-ListaRot* CadastraRoteador(Roteador* rot,ListaRot* lista){
+
+ListaRot* CadastraRoteador(ListaRot* lista,int* idRot,char* nomeRot,char* nomeOperadora){
     Celula_R* nova = (Celula_R*)malloc(sizeof(Celula_R));
 
-    nova->rot = rot;
+    nova->rot = CriaRoteador(&idRot,nomeRot,nomeOperadora);
+
+    nova->rot = retornaRot(nova);
     nova->prox = NULL;
     lista->ult->prox = nova;
     lista->ult = nova;
@@ -47,7 +54,7 @@ ListaRot* CadastraRoteador(Roteador* rot,ListaRot* lista){
     return lista;
 }
 
-Roteador* buscaRoteador(char* nomeRot,ListaRot* lista, FILE* log){
+Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
     Celula_R* p;
     int existeRot = 0;
     int listaVazia = 1;
@@ -55,7 +62,7 @@ Roteador* buscaRoteador(char* nomeRot,ListaRot* lista, FILE* log){
     for(p=lista->prim;p!=NULL;p=p->prox){
         listaVazia = 0;
         if(strcmp(retornaNomeRot(p->rot),nomeRot)==0){
-            return p->rot;
+            return p;
             existeRot = 1;
         }
     }
@@ -68,11 +75,11 @@ Roteador* buscaRoteador(char* nomeRot,ListaRot* lista, FILE* log){
     }
 }
 
-void RemoveRoteador(Roteador* rot,ListaRot* listaR){
+void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     Celula_R* p = listaR->prim;
     Celula_R* ant = NULL;
 
-    while(p!=NULL && retornaIdRot(p->rot)==retornaIdRot(rot)){
+    while(p!=NULL && retornaIdRot(p->rot)==retornaIdRot(retornaRot(cel))){
         ant = p;
         p = p->prox;
     }
@@ -122,24 +129,7 @@ void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******A
 }
 
 
-void EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR,FILE*saida){
-    Roteador* rot1 = retornaRotTerm(term1);
-    Roteador* rot2 = retornaRotTerm(term2);
-    char* resposta;
 
-    char* nomeTerm1 = retornaNomeTerm(term1);
-    char* nomeTerm2 = retornaNomeTerm(term2);
-
-
-    if(retornaEnlaces(rot1) == NULL || retornaEnlaces(rot2) == NULL){
-        resposta = strdup("NAO");
-        fprintf(saida,"ENVIARPACOTESDADOS %s %s: NAO\n",nomeTerm1,nomeTerm2);
-    }else{
-        resposta = strdup("SIM");
-        fprintf(saida,"ENVIARPACOTESDADOS %s %s: SIM\n",nomeTerm1,nomeTerm2);
-    }
-
-}
 
 void LiberaListaRot(ListaRot* listaR){ // Destroi a lista de roteadores
     Celula_R* p = listaR->prim;

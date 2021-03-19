@@ -6,15 +6,13 @@
 #include "listaRoteadores.h"
 
 
-
-
-
 void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM,FILE* log, int* idRot,int* idTerm,FILE* saida){
     char instrucao[100];
     char nomeRot[100],nomeRot1[100],nomeRot2[100];
     char nomeOperadora[100];
     char nomeLoc[100];
     char nomeTerm[100];
+    
 
     char pacoteDados;
 
@@ -26,19 +24,17 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     if(strcmp(instrucao,"CADASTRAROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
         fscanf(entrada,"%s",nomeOperadora);  
-
-        //cria roteador
-        Roteador* novoRot = CriaRoteador(*idRot,nomeRot,nomeOperadora);
-        *idRot++;
+       
         // executar cadastra roteador
 
-        listaROT = CadastraRoteador(novoRot, listaROT);
+        listaROT = CadastraRoteador(listaROT,idRot,nomeRot,nomeOperadora);
+        *idRot++;
     
     }
     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
     
-        listaROT = RemoveRoteador(buscaRoteador(nomeRot,listaROT,log),listaROT);     // executar remove roteador
+        listaROT = RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
       
     }
 
@@ -46,10 +42,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeRot1);
         fscanf(entrada,"%s",nomeRot2);
 
+        Celula_R* cel1;
+        Celula_R* cel2;
+
+        cel1 = buscaCelRot(nomeRot1,listaROT,log);
+        cel2 = buscaCelRot(nomeRot2,listaROT,log);
+
         // executar conecta roteadores
 
-        ConectaRoteadores(buscaRoteador(nomeRot1,listaROT,log), buscaRoteador(nomeRot2,listaROT,log));
-
+        ConectaRoteadores(cel1,cel2,retornaEnlaces(retornaRot(cel1)),retornaEnlaces(retornaRot(cel2)));
 
     }
 
@@ -64,7 +65,8 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar desconecta roteadores
 
-        DesconectaRoteadores(buscaRoteador(nomeRot1,listaROT,log), buscaRoteador(nomeRot2,listaROT,log));
+
+        DesconectaRoteadores(buscaCelRot(nomeRot1,listaROT,log),buscaCelRot(nomeRot2,listaROT,log));
     }
 
     if(strcmp(instrucao,"DESCONECTATERMINAL")==0){
@@ -95,7 +97,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm);
 
         // executar remove terminal
-        RemoveTerminal(buscaTerminal(nomeTerm,listaTERM,log),listaTERM,log);
+        RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
     if(strcmp(instrucao,"CONECTATERMINAL")==0){
@@ -103,7 +105,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeRot);
         
         // executar conecta terminal
-        ConectaTerminal(buscaTerminal(nomeTerm1,listaTERM,log), buscaRoteador(nomeRot,listaROT,log));
+        ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
     }
 
     if(strcmp(instrucao,"ENVIARPACOTESDADOS")==0){
@@ -112,7 +114,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar enviar pacotes dados
 
-        EnviaPacotesDados(buscaTerminal(nomeTerm1,listaTERM,log),buscaTerminal(nomeTerm2,listaTERM,log),listaROT,saida);
+        EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida);
     }
 
 

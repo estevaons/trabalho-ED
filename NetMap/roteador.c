@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "roteador.h"
+#include "listaRoteadores.h"
 
 
 struct roteador{
@@ -40,14 +41,14 @@ ListaRot* retornaEnlaces(Roteador* rot){
     return rot->listaEnlaces;
 }
 
-void ConectaRoteadores(Roteador* rot1,Roteador* rot2){ 
-    rot1->listaEnlaces = CadastraRoteador(rot2,rot1->listaEnlaces);
-    rot2->listaEnlaces = CadastraRoteador(rot1,rot2->listaEnlaces);
+void ConectaRoteadores(Celula_R* cel1,Celula_R* cel2,ListaRot* listaRot1,ListaRot* listaRot2){ 
+    listaRot1 = CadastraRoteador(listaRot1,retornaIdRot(retornaRot(cel2)),retornaNomeRot(retornaRot(cel2)),retornaOperadoraRot(retornaRot(cel2)));
+    listaRot2 = CadastraRoteador(listaRot2,retornaIdRot(retornaRot(cel1)),retornaNomeRot(retornaRot(cel1)),retornaOperadoraRot(retornaRot(cel1)));
 }
 
-void DesconectaRoteadores(Roteador* rot1,Roteador* rot2){
-    RemoveRoteador(rot1,rot2->listaEnlaces);
-    RemoveRoteador(rot2,rot1->listaEnlaces);
+void DesconectaRoteadores(Celula_R* cel1,Celula_R* cel2){
+    RemoveRoteador(retornaRot(cel1),retornaEnlaces(retornaRot(cel2)));
+    RemoveRoteador(retornaRot(cel2),retornaEnlaces(retornaRot(cel1)));
 }
 
 void ImprimeRoteador(Roteador* rot){

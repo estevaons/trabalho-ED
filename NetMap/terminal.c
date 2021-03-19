@@ -8,7 +8,7 @@ struct terminal{
     int id;
     char* nome;
     char* loc;
-    Roteador* rot;
+    Celula_R* rot;
 };
 
 Terminal* CriaTerminal(int id,char* nome,char* loc){
@@ -22,6 +22,11 @@ Terminal* CriaTerminal(int id,char* nome,char* loc){
 
     return term;
 
+}
+
+
+Celula_R* retornaCelRTerm(Terminal* term){
+    return term->rot;
 }
 
 int retornaIdTerm(Terminal* term){
@@ -38,10 +43,6 @@ char* retornaLocTerm(Terminal* term){
 
 Roteador* retornaRotTerm(Terminal* term){
     return term->rot;
-}
-
-Terminal* ConectaTerminal(Terminal* term,Roteador* rot){
-    term->rot = rot;
 }
 
 void DesconectaTerminal(Terminal* term){

@@ -4,7 +4,6 @@
 
 #include "listaTerminais.h"
 
-typedef struct celula_t Celula_T;
 
 struct celula_t{ // Celula da lista de terminais
     Celula_T* prox;
@@ -41,19 +40,35 @@ ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista){
     return lista;
 }
 
-void RemoveTerminal(Terminal* term,ListaTerm* listaT,FILE* log){
+Terminal* retornaTerm(Celula_T* cel){
+    return cel->term;
+}
+
+void ConectaTerminal(Celula_T* celT,Celula_R* celR){
+
+// PODEMOS TER UM PROBLEMA AQUI!!!!!
+
+
+    Celula_R* celRTerm = retornaCelRTerm(celT->term);
+
+    celRTerm = celR;
+
+}
+
+
+void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
     Celula_T* p = listaT->prim;
     Celula_T* ant = NULL;
     int listaVazia = 1;
 
-    while(p!=NULL && retornaIdTerm(p->term)!=retornaIdTerm(term)){
+    while(p!=NULL && retornaIdTerm(p->term)!=retornaIdTerm(CelTerm->term)){
         ant = p;
         p = p->prox;
         listaVazia = 0;
     }
 
     if(p==NULL && listaVazia==0){ // não encontrou o terminal na lista
-        fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",retornaNomeTerm(term));
+        fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",retornaNomeTerm(CelTerm->term));
         return 0;
     }
 
@@ -82,6 +97,26 @@ void RemoveTerminal(Terminal* term,ListaTerm* listaT,FILE* log){
     free(p);
 }
 
+void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida){
+    Celula_R* celR1 = retornaCelRTerm(CelTerm1);
+    Celula_R* celR2 = retornaCelRTerm(CelTerm2);
+    char* resposta;
+
+    char* nomeTerm1 = retornaNomeTerm(CelTerm1->term);
+    char* nomeTerm2 = retornaNomeTerm(CelTerm2->term);
+
+
+    if(retornaEnlaces(rot1) == NULL || retornaEnlaces(rot2) == NULL){
+        resposta = strdup("NAO");
+        fprintf(saida,"ENVIARPACOTESDADOS %s %s: NAO\n",nomeTerm1,nomeTerm2);
+    }else{
+        resposta = strdup("SIM");
+        fprintf(saida,"ENVIARPACOTESDADOS %s %s: SIM\n",nomeTerm1,nomeTerm2);
+    }
+
+}
+
+
 void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
     int cont = 0;
     Celula_T* p = listaT->prim;
@@ -107,7 +142,7 @@ void ImprimeListaTerm(ListaTerm* listaT){
 
 
 
-Terminal* buscaTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
+Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
     Celula_T* p;
     int existeTerm = 0;
     int listaVaziaT = 1;
@@ -115,7 +150,7 @@ Terminal* buscaTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
     for(p=lista->prim; p!=NULL; p=p->prox){
         listaVaziaT = 0;
         if(strcmp(retornaNomeTerm(p->term),nomeTerm)==0){
-            return p->term;
+            return p;
             existeTerm =1;
         }
     }
