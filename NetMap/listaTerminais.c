@@ -82,7 +82,7 @@ void RemoveTerminal(Terminal* term,ListaTerm* listaT,FILE* log){
     free(p);
 }
 
-void FrequenciaTerminal(ListaTerm* listaT , char* loc){
+void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
     int cont = 0;
     Celula_T* p = listaT->prim;
 
@@ -91,8 +91,9 @@ void FrequenciaTerminal(ListaTerm* listaT , char* loc){
             cont++;
         }
     }
+ 
+    fprintf(saida,"FREQUENCIATERMINAL %s: %d\n",loc,cont);
 
-    printf("Existem %d terminais cadastrados em %s.",cont,loc);
 }
 
 
@@ -103,6 +104,30 @@ void ImprimeListaTerm(ListaTerm* listaT){
         ImprimeTerminal(p->term);
     }
 }
+
+
+
+Terminal* buscaTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
+    Celula_T* p;
+    int existeTerm = 0;
+    int listaVaziaT = 1;
+
+    for(p=lista->prim; p!=NULL; p=p->prox){
+        listaVaziaT = 0;
+        if(strcmp(retornaNomeTerm(p->term),nomeTerm)==0){
+            return p->term;
+            existeTerm =1;
+        }
+    }
+    if(existeTerm==0 && listaVaziaT== 0){
+        fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",nomeTerm);              
+    }
+
+    else if(listaVaziaT == 1){
+        fprintf(log,"O NetMap não contém terminais.\n");       
+    }
+}
+
 
 void LiberaListaTerm(ListaTerm* listaT){
     Celula_T* p = listaT->prim;

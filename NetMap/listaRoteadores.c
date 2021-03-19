@@ -98,7 +98,7 @@ void RemoveRoteador(Roteador* rot,ListaRot* listaR){
 
 }
 
-void FrequenciaOperadora(ListaRot* listaR,char* operadora){ // Imprime a quantidade de roteadores cadastrados de uma operadora
+void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida){ // Imprime a quantidade de roteadores cadastrados de uma operadora
     int cont = 0;
     Celula_R* p = listaR->prim;
 
@@ -108,7 +108,10 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora){ // Imprime a quantid
         }
     }
 
-    printf("Existem %d roteadores cadastrados da operadora %s.",cont,operadora);
+
+
+    fprintf(saida,"FREQUENCIAOPERADORA %s: %d\n",operadora,cont);
+
 }
 
 void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******ANALISAR DNV temos que imprimir de tras pra frente
@@ -119,17 +122,21 @@ void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******A
 }
 
 
-char* EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR){
+void EnviaPacotesDados(Terminal* term1, Terminal* term2,ListaRot* listaR,FILE*saida){
     Roteador* rot1 = retornaRotTerm(term1);
     Roteador* rot2 = retornaRotTerm(term2);
     char* resposta;
 
+    char* nomeTerm1 = retornaNomeTerm(term1);
+    char* nomeTerm2 = retornaNomeTerm(term2);
+
+
     if(retornaEnlaces(rot1) == NULL || retornaEnlaces(rot2) == NULL){
-        resposta = 'NAO';
-        return resposta;
+        resposta = strdup("NAO");
+        fprintf(saida,"ENVIARPACOTESDADOS %s %s: NAO\n",nomeTerm1,nomeTerm2);
     }else{
-        resposta = 'SIM';
-        return resposta;
+        resposta = strdup("SIM");
+        fprintf(saida,"ENVIARPACOTESDADOS %s %s: SIM\n",nomeTerm1,nomeTerm2);
     }
 
 }

@@ -44,7 +44,7 @@ Terminal* ConectaTerminal(Terminal* term,Roteador* rot){
     term->rot = rot;
 }
 
-Terminal* DesconectaTerminal(Terminal* term){
+void DesconectaTerminal(Terminal* term){
     term->rot = NULL;
 }
 

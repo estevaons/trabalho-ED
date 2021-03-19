@@ -8,12 +8,15 @@
 
 
 
-void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM,FILE* log, int* idRot,int* idTerm){
+
+void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM,FILE* log, int* idRot,int* idTerm,FILE* saida){
     char instrucao[100];
     char nomeRot[100],nomeRot1[100],nomeRot2[100];
     char nomeOperadora[100];
     char nomeLoc[100];
     char nomeTerm[100];
+
+    char pacoteDados;
 
     char nomeTerm1[100];
     char nomeTerm2[100];
@@ -68,18 +71,23 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm);
 
         // executar desconecta terminal
+
+        DesconectaTerminal(buscaTerminal(nomeTerm,listaTERM,log));
     }
     
     if(strcmp(instrucao,"FREQUENCIAOPERADORA")==0){
         fscanf(entrada,"%s",nomeOperadora);
 
         // executar frequencia operadora
+
+        FrequenciaOperadora(listaROT,nomeOperadora,saida);
     }
 
     if(strcmp(instrucao,"FREQUENCIATERMINAL")==0){
         fscanf(entrada,"%s",nomeLoc);
 
         // executar frequencia terminal
+        FrequenciaTerminal(listaTERM,nomeLoc,saida);
     }
   
 
@@ -87,13 +95,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm);
 
         // executar remove terminal
+        RemoveTerminal(buscaTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
     if(strcmp(instrucao,"CONECTATERMINAL")==0){
         fscanf(entrada,"%s",nomeTerm1);
-        fscanf(entrada,"%s",nomeTerm2);
+        fscanf(entrada,"%s",nomeRot);
         
         // executar conecta terminal
+        ConectaTerminal(buscaTerminal(nomeTerm1,listaTERM,log), buscaRoteador(nomeRot,listaROT,log));
     }
 
     if(strcmp(instrucao,"ENVIARPACOTESDADOS")==0){
@@ -101,6 +111,8 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm2);
 
         // executar enviar pacotes dados
+
+        EnviaPacotesDados(buscaTerminal(nomeTerm1,listaTERM,log),buscaTerminal(nomeTerm2,listaTERM,log),listaROT,saida);
     }
 
 
@@ -116,11 +128,13 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 int main(){
     FILE* entrada;
     FILE* log;
+    FILE* saida;
     int idRot = 0; 
     int idTerm = 0;
 
     //abrindo arquivo
     log = fopen("log.txt","w");
+    saida = fopen("saida.txt","w");
     entrada = fopen("entrada.txt","r");
 
     if(entrada==NULL){
@@ -135,7 +149,7 @@ int main(){
 
     while(!feof(entrada)){
 
-        le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm);
+        le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);
         
 
     }
