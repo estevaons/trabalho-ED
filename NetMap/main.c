@@ -50,7 +50,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar conecta roteadores
 
-        ConectaRoteadores(cel1,cel2,retornaEnlaces(retornaRot(cel1)),retornaEnlaces(retornaRot(cel2)));
+        ConectaRoteadores(cel1,cel2); // ********************
 
     }
 
@@ -66,7 +66,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         // executar desconecta roteadores
 
 
-        DesconectaRoteadores(buscaCelRot(nomeRot1,listaROT,log),buscaCelRot(nomeRot2,listaROT,log));
+        DesconectaRoteadores(buscaCelRot(nomeRot1,listaROT,log),buscaCelRot(nomeRot2,listaROT,log),log);
     }
 
     if(strcmp(instrucao,"DESCONECTATERMINAL")==0){

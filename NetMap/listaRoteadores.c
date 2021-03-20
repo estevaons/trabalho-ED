@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "listaRoteadores.h"
+#include "listaEnlaces.h"
 
 #include "roteador.h"
 
@@ -40,7 +41,6 @@ ListaRot* CadastraRoteador(ListaRot* lista,int* idRot,char* nomeRot,char* nomeOp
 
     nova->rot = CriaRoteador(&idRot,nomeRot,nomeOperadora);
 
-    nova->rot = retornaRot(nova);
     nova->prox = NULL;
     lista->ult->prox = nova;
     lista->ult = nova;
@@ -79,7 +79,7 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     Celula_R* p = listaR->prim;
     Celula_R* ant = NULL;
 
-    while(p!=NULL && retornaIdRot(p->rot)==retornaIdRot(retornaRot(cel))){
+    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRot(cel))){
         ant = p;
         p = p->prox;
     }
@@ -101,6 +101,22 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
         ant->prox = p->prox;
     }
 
+    Celula_E* celE;
+    Roteador* rot = retornaRot(cel);
+    Roteador* rotCel_E = retornaRotEnlaces(celE);
+    rotCel_E = rot;
+
+    Enlaces* listaEnlaces = retornaEnlaces(rot);
+    Enlaces* listaEnlacesP;
+
+    Celula_E* q;
+
+    for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;retornaProxEnlaces(q)){
+        listaEnlacesP = retornaEnlaces(retornaRot(q));
+        RemoveRoteadorEnlaces(celE,listaEnlacesP);
+    }
+
+    LiberaListaEnlaces(p);
     free(p);
 
 }
@@ -127,7 +143,6 @@ void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores *******A
         ImprimeRoteador(p->rot);
     }
 }
-
 
 
 

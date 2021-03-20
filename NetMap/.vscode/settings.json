@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "listaterminais.h": "c"
+        "listaterminais.h": "c",
+        "roteador.h": "c"
     }
 }
