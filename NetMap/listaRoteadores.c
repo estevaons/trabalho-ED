@@ -3,9 +3,6 @@
 #include <string.h>
 
 #include "listaRoteadores.h"
-#include "listaEnlaces.h"
-
-#include "roteador.h"
 
 
 struct celula_r{ // Celula da lista de roteadores
@@ -20,9 +17,6 @@ struct ListaDeRoteadores{// Sentinela da lista de roteadores
     int tamanho;
 };
 
-Roteador* retornaRot(Celula_R* cel){
-    return cel->rot;
-}
 
 ListaRot* CriaListaRot(){
     ListaRot* lista = (ListaRot*)malloc(sizeof(ListaRot));
@@ -54,6 +48,27 @@ ListaRot* CadastraRoteador(ListaRot* lista,int* idRot,char* nomeRot,char* nomeOp
     return lista;
 }
 
+int verificaRoteador(Celula_R* cel,ListaRot* lista){
+    int existe = 0;
+    Roteador* rot = retornaRot(cel);
+    Celula_R* p;
+    char* nome = retornaNomeRot(rot);
+
+    char* nome2;
+    Roteador* rot2;
+
+    for(p=lista->prim;p!=NULL;p=p->prox){
+        rot2 = retornaRot(p);
+        nome2 = retornaNomeRot(rot2);
+        if(strcmp(nome,nome2)==0){
+            existe = 1;
+        }
+    }
+
+    return existe;
+}
+
+
 Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
     Celula_R* p;
     int existeRot = 0;
@@ -74,6 +89,49 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
         fprintf(log,"O NetMap não contém roteadores.\n");       
     }
 }
+
+void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
+
+    Roteador* rot1 = retornaRot(cel1);
+    Roteador* rot2 = retornaRot(cel2);
+
+    Enlaces* listaEnlaces1 = retornaEnlaces(rot1);
+    Enlaces* listaEnlaces2 = retornaEnlaces(rot2);
+
+    Celula_E* cel_E_lista1 = buscaRoteadorEnlaces(rot2,listaEnlaces1,log,rot1);
+    
+    Celula_E* cel_E_lista2 = buscaRoteadorEnlaces(rot1,listaEnlaces2,log,rot2);
+
+
+    RemoveRoteadorEnlaces(cel_E_lista1,listaEnlaces2); // remover uma celula_E de uma lista de enlaces de um roteador
+    RemoveRoteadorEnlaces(cel_E_lista2,listaEnlaces1); 
+    
+}
+
+Roteador* retornaRot(Celula_R* cel){
+    return cel->rot;
+}
+
+
+void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){  
+    Celula_E* nova1 = (Celula_E*)malloc(sizeof(tamanhoCelE()));
+    Roteador* rot1 = retornaRotEnlaces(nova1);
+    rot1 = retornaRot(cel1);  
+
+    Celula_E* nova2 = (Celula_E*)malloc(sizeof(tamanhoCelE()));
+    Roteador* rot2 = retornaRotEnlaces(nova2);
+    rot2 = retornaRot(cel2);
+
+
+    Enlaces* listaEnlaces1 = retornaEnlaces(retornaRot(cel1));
+    Enlaces* listaEnlaces2 = retornaEnlaces(retornaRot(cel2));
+
+    listaEnlaces1 = CadastraRoteadorEnlaces(listaEnlaces1, nova2);
+
+    listaEnlaces2 = CadastraRoteadorEnlaces(listaEnlaces2, nova1);
+   
+}
+
 
 void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     Celula_R* p = listaR->prim;
@@ -111,8 +169,8 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
 
     Celula_E* q;
 
-    for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;retornaProxEnlaces(q)){
-        listaEnlacesP = retornaEnlaces(retornaRot(q));
+    for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;q = retornaProxEnlaces(q)){
+        listaEnlacesP = retornaEnlaces(retornaRotEnlaces(q));
         RemoveRoteadorEnlaces(celE,listaEnlacesP);
     }
 
@@ -126,12 +184,11 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida){ // Impr
     Celula_R* p = listaR->prim;
 
     while(p!=NULL){
-        if(strcmp(retornaOperadoraRot(p->rot),operadora)){
+        if(strcmp(retornaOperadoraRot(p->rot),operadora)==0){
             cont++;
         }
+        p = p->prox;
     }
-
-
 
     fprintf(saida,"FREQUENCIAOPERADORA %s: %d\n",operadora,cont);
 
