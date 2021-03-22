@@ -1,7 +1,7 @@
-#ifndef TERMINAL_H
-#define TERMINAL_H
+#ifndef terminal_h
+#define terminal_h
 
-#include "roteador.h"
+#include "listaRoteadores.h"
 
 
 typedef struct terminal Terminal;
@@ -12,13 +12,9 @@ int retornaIdTerm(Terminal* term); // retorna o id do terminal
 
 char* retornaNomeTerm(Terminal* term); // retorna o nome do terminal
 
+Celula_R* retornaCelRTerm(Terminal* term);
+
 char* retornaLocTerm(Terminal* term); // retorna a localizaçao do terminal
-
-Celula_R* retornaCelRTerm(Terminal* term); // retorna celula de roteador pro terminal
-
-Roteador* retornaRotTerm(Terminal* term); // retorna o roteador conectado ao terminal
-
-void DesconectaTerminal(Terminal* term); //  desconecta um terminal de um roteador
 
 void ImprimeTerminal(Terminal* term); // imprime um terminal
 

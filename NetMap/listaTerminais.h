@@ -1,5 +1,5 @@
-#ifndef LISTATERMINAIS_H
-#define LISTATERMINAIS_H
+#ifndef listaTerminais_h
+#define listaTerminais_h
 
 #include "terminal.h"
 
@@ -8,6 +8,10 @@ typedef struct celula_t Celula_T;
 typedef struct ListaDeTerminais ListaTerm;
 
 ListaTerm* CriaListaTerm();
+
+Terminal* retornaTerm(Celula_T* cel);
+
+void DesconectaTerminal(Celula_T* cel); // desconecta um terminal de um roteador
 
 ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista); // Cadastra um terminal a lista
 

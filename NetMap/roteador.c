@@ -5,9 +5,6 @@
 #include "roteador.h"
 
 
-
-
-
 struct roteador{
     int** id;
     char* nome;

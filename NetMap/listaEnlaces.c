@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "roteador.h"
-#include "listaRoteadores.h"
+
 #include "listaEnlaces.h"
 
 struct celula_e{
@@ -22,62 +21,16 @@ Celula_E* retornaPrimEnlaces(Enlaces* enlaces){
     return enlaces->prim;
 }
 
-Roteador* retornaUltEnlaces(Enlaces* enlaces){
-    return enlaces->ult;
-}
+//Roteador* retornaUltEnlaces(Enlaces* enlaces){
+//   return enlaces->ult;
+//}
 
-int retornaTamanhoEnlaces(Enlaces* enlaces){
+int* retornaTamanhoEnlaces(Enlaces* enlaces){
     return enlaces->tamanho;
 }
 
 Celula_E* retornaProxEnlaces(Celula_E* cel){
     return cel->prox;
-}
-
-Roteador* retornaRotEnlaces(Celula_E* cel){
-    return cel->rot;
-}
-
-Enlaces* criaListaEnlaces(){
-    Enlaces* listaEnlaces = (Enlaces*)malloc(sizeof(Enlaces));
-
-    listaEnlaces->prim = NULL;
-    listaEnlaces->ult = NULL;
-
-    listaEnlaces->tamanho = 0;
-
-    return listaEnlaces;
-}
-
-Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){
-    cel->prox = NULL;
-    listaEnlaces->ult->prox = cel;
-    listaEnlaces->ult = cel;
-
-    if(listaEnlaces->prim==NULL){
-        listaEnlaces->prim = cel;
-    }
-
-    listaEnlaces->tamanho = *(listaEnlaces->tamanho) + 1;
-
-    return listaEnlaces;
-}
-
-void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){  
-    Celula_E* nova1 = (Celula_E*)malloc(sizeof(Celula_E));
-    nova1->rot = retornaRot(cel1);  
-
-    Celula_E* nova2 = (Celula_E*)malloc(sizeof(Celula_E));
-    nova2->rot = retornaRot(cel2);
-
-
-    Enlaces* listaEnlaces1 = retornaEnlaces(retornaRot(cel1));
-    Enlaces* listaEnlaces2 = retornaEnlaces(retornaRot(cel2));
-
-    listaEnlaces1 = CadastraRoteadorEnlaces(listaEnlaces1, nova2);
-
-    listaEnlaces2 = CadastraRoteadorEnlaces(listaEnlaces2, nova1);
-   
 }
 
 Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador* rot2){
@@ -88,10 +41,10 @@ Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador
     int listaVazia = 1;
     Roteador* rotP;
 
-    for(p=lista->prim;p!=NULL;p=p->prox){
+    for(p=retornaPrimEnlaces(lista);p!=NULL;p=retornaProxEnlaces(p)){
         listaVazia = 0;
-        rotP = p->rot;
-        if(retornaIdRot(p->rot)==idRot){
+        rotP = retornaRotEnlaces(p);
+        if(retornaIdRot(retornaRotEnlaces(p))==idRot){
             return p;
             existeRot = 1;      
         }
@@ -106,14 +59,44 @@ Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador
         return NULL;      
      }
 }
-    
+
+Enlaces* criaListaEnlaces(){
+    Enlaces* listaEnlaces = (Enlaces*)malloc(sizeof(Enlaces));
+
+    listaEnlaces->prim = NULL;
+    listaEnlaces->ult = NULL;
+
+    listaEnlaces->tamanho = 0;
+
+    return listaEnlaces;
+}
+
+Roteador* retornaRotEnlaces(Celula_E* cel){
+    return cel->rot;
+}
+
+Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){
+    cel->prox = NULL;
+    listaEnlaces->ult->prox = cel;
+    listaEnlaces->ult = cel;
+
+    if(listaEnlaces->prim==NULL){
+        listaEnlaces->prim = cel;
+    }
+
+    listaEnlaces->tamanho = (listaEnlaces->tamanho) + 1;
+
+    return listaEnlaces;
+}
+
+
 
 
 void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){
     Celula_E* p = lista->prim;
     Celula_E* ant = NULL;
 
-    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRot(cel))){
+    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRotEnlaces(cel))){
         ant = p;
         p = p->prox;
     }
@@ -139,29 +122,17 @@ void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){
 
 }
 
-void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
 
-    Roteador* rot1 = retornaRot(cel1);
-    Roteador* rot2 = retornaRot(cel2);
-
-    Enlaces* listaEnlaces1 = retornaEnlaces(rot1);
-    Enlaces* listaEnlaces2 = retornaEnlaces(rot2);
-
-    Celula_E* cel_E_lista1 = buscaRoteadorEnlaces(rot2,listaEnlaces1,log,rot1);
-    
-    Celula_E* cel_E_lista2 = buscaRoteadorEnlaces(rot1,listaEnlaces2,log,rot2);
-
-
-    RemoveRoteadorEnlaces(cel_E_lista1,listaEnlaces2); // remover uma celula_E de uma lista de enlaces de um roteador
-    RemoveRoteadorEnlaces(cel_E_lista2,listaEnlaces1); 
-    
-}
 
 void ImprimeListaEnlaces(Enlaces* lista){ // Printa a lista de enlaces *******ANALISAR DNV temos que imprimir de tras pra frente
     Celula_E* p;
     for(p=lista->prim;p != NULL;p = p->prox){
         ImprimeRoteador(p->rot);
     }
+}
+
+size_t tamanhoCelE(){
+    return sizeof(Celula_E);
 }
 
 void LiberaListaEnlaces(Enlaces* lista){ // Destroi a lista de roteadores

@@ -45,11 +45,10 @@ Terminal* retornaTerm(Celula_T* cel){
 }
 
 void ConectaTerminal(Celula_T* celT,Celula_R* celR){
+    
+    Terminal* term = retornaTerm(celT);
 
-// PODEMOS TER UM PROBLEMA AQUI!!!!!
-
-
-    Celula_R* celRTerm = retornaCelRTerm(celT->term);
+    Celula_R* celRTerm = retornaCelRTerm(term);
 
     celRTerm = celR;
 
@@ -106,7 +105,7 @@ void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida){
     char* nomeTerm2 = retornaNomeTerm(CelTerm2->term);
 
 
-    if(retornaEnlaces(rot1) == NULL || retornaEnlaces(rot2) == NULL){
+    if(retornaEnlaces(retornaRot(celR1)) == NULL || retornaEnlaces(retornaRot(celR2)) == NULL){
         resposta = strdup("NAO");
         fprintf(saida,"ENVIARPACOTESDADOS %s %s: NAO\n",nomeTerm1,nomeTerm2);
     }else{
@@ -122,15 +121,28 @@ void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
     Celula_T* p = listaT->prim;
 
     while(p!=NULL){
-        if(strcmp(retornaLocTerm(p->term),loc)){
+        if(strcmp(retornaLocTerm(p->term),loc)==0){
             cont++;
         }
+        p = p->prox;
     }
  
     fprintf(saida,"FREQUENCIATERMINAL %s: %d\n",loc,cont);
 
 }
 
+void DesconectaTerminal(Celula_T* cel){
+    Terminal* term = retornaTerm(cel);
+    Roteador* rotTerm;
+
+    rotTerm = retornaRotTerm(term);
+
+    rotTerm = NULL;
+}
+
+Terminal* retornaTerm(Celula_T* cel){
+    return cel->term;
+}
 
 
 void ImprimeListaTerm(ListaTerm* listaT){
