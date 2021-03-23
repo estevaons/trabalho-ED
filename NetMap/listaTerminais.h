@@ -7,9 +7,9 @@ typedef struct celula_t Celula_T;
 
 typedef struct ListaDeTerminais ListaTerm;
 
-ListaTerm* CriaListaTerm();
+ListaTerm* CriaListaTerm(); // cria a lista de terminais
 
-Terminal* retornaTerm(Celula_T* cel);
+Terminal* retornaTerm(Celula_T* cel); // retorna o terminal de uma celula T
 
 void DesconectaTerminal(Celula_T* cel); // desconecta um terminal de um roteador
 
@@ -25,9 +25,7 @@ void ImprimeListaTerm(ListaTerm* listaT); // Imprime a lista de terminais
 
 void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida); // verifica se é possivel enviar dados do term1 para o term2
 
-Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log);
-
-Terminal* retornaTerm(Celula_T* cel);
+Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log); // busca uma celula do tipo T pelo nome do seu terminal na lista de terminais
 
 void LiberaListaTerm(ListaTerm* listaT); // Libera a lista de terminais
 

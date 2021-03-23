@@ -68,12 +68,12 @@ void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
 
     if(p==NULL && listaVazia==0){ // não encontrou o terminal na lista
         fprintf(log,"ERRO: Terminal %s inexistente no NetMap!\n",retornaNomeTerm(CelTerm->term));
-        return 0;
+        exit(0);
     }
 
     if(p==NULL && listaVazia==1){ // lista vazia
         fprintf(log,"O NetMap não contém terminais.\n");
-        return 0;
+        exit(0);
     }
 
     if(p == listaT->prim && p == listaT->ult){ // unica celula
@@ -97,8 +97,11 @@ void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
 }
 
 void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida){
-    Celula_R* celR1 = retornaCelRTerm(CelTerm1);
-    Celula_R* celR2 = retornaCelRTerm(CelTerm2);
+    Terminal* t1 = retornaTerm(CelTerm1);
+    Terminal* t2 = retornaTerm(CelTerm2);
+
+    Celula_R* celR1 = retornaCelRTerm(t1);
+    Celula_R* celR2 = retornaCelRTerm(t2);
     char* resposta;
 
     char* nomeTerm1 = retornaNomeTerm(CelTerm1->term);
@@ -133,15 +136,14 @@ void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
 
 void DesconectaTerminal(Celula_T* cel){
     Terminal* term = retornaTerm(cel);
+    Celula_R* celR;
     Roteador* rotTerm;
 
-    rotTerm = retornaRotTerm(term);
+    celR = retornaCelRTerm(term);
+
+    rotTerm = retornaRot(celR);
 
     rotTerm = NULL;
-}
-
-Terminal* retornaTerm(Celula_T* cel){
-    return cel->term;
 }
 
 

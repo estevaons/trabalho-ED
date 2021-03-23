@@ -43,7 +43,11 @@ char* retornaLocTerm(Terminal* term){
 
 
 void ImprimeTerminal(Terminal* term){ 
-    printf("Nome do terminal : %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s",term->nome,term->id,term->loc,retornaNomeRot(term->rot));
+    Roteador* rot;
+    rot = retornaRot(term->rot);
+
+
+    printf("Nome do terminal : %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s",term->nome,term->id,term->loc,retornaNomeRot(rot));
 }
 
 void LiberaTerminal(Terminal* term){

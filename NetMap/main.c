@@ -1,6 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
 
 #include "listaTerminais.h"
 #include "listaRoteadores.h"
@@ -12,6 +13,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     char nomeOperadora[100];
     char nomeLoc[100];
     char nomeTerm[100];
+    int idROT,idTERM;
     
 
     char pacoteDados;
@@ -26,15 +28,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeOperadora);  
        
         // executar cadastra roteador
-
-        listaROT = CadastraRoteador(listaROT,idRot,nomeRot,nomeOperadora);
+        idROT = *idRot;
+        listaROT = CadastraRoteador(listaROT,idROT,nomeRot,nomeOperadora);
         *idRot++;
     
     }
     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
     
-        listaROT = RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
+       RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
       
     }
 
@@ -168,8 +170,6 @@ int main(){
     ListaRot* listaRot = CriaListaRot();
     ListaTerm* listaTerm = CriaListaTerm();
     
-
-
 
     while(!feof(entrada)){
 

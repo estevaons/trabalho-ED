@@ -3,6 +3,11 @@
 
 #include "listaRoteadores.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+
 
 typedef struct terminal Terminal;
 
@@ -12,7 +17,7 @@ int retornaIdTerm(Terminal* term); // retorna o id do terminal
 
 char* retornaNomeTerm(Terminal* term); // retorna o nome do terminal
 
-Celula_R* retornaCelRTerm(Terminal* term);
+Celula_R* retornaCelRTerm(Terminal* term);// retorna a celula R que esta conectada ao terminal
 
 char* retornaLocTerm(Terminal* term); // retorna a localizaçao do terminal
 
