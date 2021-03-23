@@ -62,6 +62,7 @@ void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperador
     
     if(lista->prim != NULL){
         lista->ult->prox= nova;
+        lista->ult = nova;
     }
     else{
         lista->prim = nova;

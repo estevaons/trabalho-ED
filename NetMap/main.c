@@ -13,6 +13,8 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     char nomeOperadora[100];
     char nomeLoc[100];
     char nomeTerm[100];
+    char locTerm[100];
+
     int idROT,idTERM;
     
 
@@ -31,6 +33,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         // executar cadastra roteador
         idROT = *idRot;
         CadastraRoteador(listaROT,idROT,nomeRot,nomeOperadora);
+
 
        
         
@@ -94,6 +97,19 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
         // }
        
+    }
+
+    if(strcmp(instrucao,"CADASTRATERMINAL")==0){
+        fscanf(entrada,"%s",nomeTerm);
+        fscanf(entrada,"%s",locTerm);
+
+        
+
+        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
+        
+
+        
+      
     }
 
     if(strcmp(instrucao,"DESCONECTATERMINAL")==0){
@@ -184,7 +200,8 @@ int main(){
 
     }
 
-    ImprimeListaRot(listaRot);
+
+    
 
 
     //fechando arquivo

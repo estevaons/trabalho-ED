@@ -25,19 +25,23 @@ ListaTerm* CriaListaTerm(){
     return listaT;
 }
 
-ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista){
+void CadastraTerminal(int id,char* nome,char* loc,ListaTerm* lista){
     Celula_T* nova = (Celula_T*)malloc(sizeof(Celula_T));
+    
+    nova->term = CriaTerminal(id,nome,loc);
 
-    nova->term = term;
     nova->prox = NULL;
-    lista->ult->prox = nova;
-    lista->ult = nova;
-
-    if(lista->prim==NULL){
-        lista->prim = nova;
+    
+    if(lista->prim != NULL){
+        lista->ult->prox= nova;
+        lista->ult = nova;
     }
-
-    return lista;
+    else{
+        lista->prim = nova;
+        lista->ult = nova;
+    }
+    
+  
 }
 
 Terminal* retornaTerm(Celula_T* cel){
@@ -153,7 +157,6 @@ void ImprimeListaTerm(ListaTerm* listaT){
         ImprimeTerminal(p->term);
     }
 }
-
 
 
 Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){

@@ -13,7 +13,7 @@ Terminal* retornaTerm(Celula_T* cel); // retorna o terminal de uma celula T
 
 void DesconectaTerminal(Celula_T* cel); // desconecta um terminal de um roteador
 
-ListaTerm* CadastraTerminal(Terminal* term,ListaTerm* lista); // Cadastra um terminal a lista
+void CadastraTerminal(int id,char* nome,char* loc,ListaTerm* lista); // Cadastra um terminal a lista
 
 void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log); // Remove um terminal da lista
 
