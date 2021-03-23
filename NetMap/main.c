@@ -26,17 +26,21 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     if(strcmp(instrucao,"CADASTRAROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
         fscanf(entrada,"%s",nomeOperadora);  
+        
        
         // executar cadastra roteador
         idROT = *idRot;
-        listaROT = CadastraRoteador(listaROT,idROT,nomeRot,nomeOperadora);
+        CadastraRoteador(listaROT,idROT,nomeRot,nomeOperadora);
+
+       
+        
         *idRot++;
     
     }
     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
     
-       RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
+    //    RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
       
     }
 
@@ -44,22 +48,22 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeRot1);
         fscanf(entrada,"%s",nomeRot2);
 
-        Celula_R* cel1;
-        Celula_R* cel2;
+        // Celula_R* cel1;
+        // Celula_R* cel2;
 
-        cel1 = buscaCelRot(nomeRot1,listaROT,log);
-        cel2 = buscaCelRot(nomeRot2,listaROT,log);
+        // cel1 = buscaCelRot(nomeRot1,listaROT,log);
+        // cel2 = buscaCelRot(nomeRot2,listaROT,log);
 
         // executar conecta roteadoresElaces
 
-        if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
-            ConectaRoteadoresEnlaces(cel1, cel2);
+        // if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
+        //     ConectaRoteadoresEnlaces(cel1, cel2);
 
-        }else if(verificaRoteador(cel1,listaROT)==0){
-            fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
-        }else if(verificaRoteador(cel2,listaROT)==0){
-            fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
-        }
+        // }else if(verificaRoteador(cel1,listaROT)==0){
+        //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
+        // }else if(verificaRoteador(cel2,listaROT)==0){
+        //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
+        // }
 
     
     }
@@ -73,22 +77,22 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeRot1);
         fscanf(entrada,"%s",nomeRot2);
 
-        Celula_R* cel1;
-        Celula_R* cel2;
+        // Celula_R* cel1;
+        // Celula_R* cel2;
 
 
-        cel1 = buscaCelRot(nomeRot1,listaROT,log);
-        cel2 = buscaCelRot(nomeRot2,listaROT,log);
+        // cel1 = buscaCelRot(nomeRot1,listaROT,log);
+        // cel2 = buscaCelRot(nomeRot2,listaROT,log);
 
-        // executar desconecta roteadores
-        if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
-            DesconectaRoteadoresEnlaces(cel1, cel2,log);
+        // // executar desconecta roteadores
+        // if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
+        //     DesconectaRoteadoresEnlaces(cel1, cel2,log);
 
-        }else if(verificaRoteador(cel1,listaROT)==0){
-            fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
-        }else if(verificaRoteador(cel2,listaROT)==0){
-            fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
-        }
+        // }else if(verificaRoteador(cel1,listaROT)==0){
+        //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
+        // }else if(verificaRoteador(cel2,listaROT)==0){
+        //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
+        // }
        
     }
 
@@ -97,7 +101,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar desconecta terminal
 
-        DesconectaTerminal(buscaCelTerminal(nomeTerm,listaTERM,log));
+        // DesconectaTerminal(buscaCelTerminal(nomeTerm,listaTERM,log));
 
     }
     
@@ -106,14 +110,14 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar frequencia operadora
 
-        FrequenciaOperadora(listaROT,nomeOperadora,saida);
+        // FrequenciaOperadora(listaROT,nomeOperadora,saida);
     }
 
     if(strcmp(instrucao,"FREQUENCIATERMINAL")==0){
         fscanf(entrada,"%s",nomeLoc);
 
         // executar frequencia terminal
-        FrequenciaTerminal(listaTERM,nomeLoc,saida);
+        // FrequenciaTerminal(listaTERM,nomeLoc,saida);
     }
   
 
@@ -121,7 +125,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm);
 
         // executar remove terminal
-        RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
+        // RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
     if(strcmp(instrucao,"CONECTATERMINAL")==0){
@@ -129,7 +133,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeRot);
         
         // executar conecta terminal
-        ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
+        // ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
     }
 
     if(strcmp(instrucao,"ENVIARPACOTESDADOS")==0){
@@ -138,20 +142,20 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar enviar pacotes dados
 
-        EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida);
+        //EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida);
     }
 
 
     if(strcmp(instrucao,"FIM")==0){
-        printf("PROGRAMA TERMINANDO !!!\n");
+        // printf("PROGRAMA TERMINANDO !!!\n");
 
         //termina o programa
-        exit(0);
+        // exit(0);
     }
 
 }
 
-int main(){
+int main(){   
     FILE* entrada;
     FILE* log;
     FILE* saida;
@@ -159,6 +163,7 @@ int main(){
     int idTerm = 0;
 
     //abrindo arquivo
+ 
     log = fopen("log.txt","w");
     saida = fopen("saida.txt","w");
     entrada = fopen("entrada.txt","r");
@@ -169,6 +174,8 @@ int main(){
 
     ListaRot* listaRot = CriaListaRot();
     ListaTerm* listaTerm = CriaListaTerm();
+
+
     
 
     while(!feof(entrada)){
@@ -176,6 +183,8 @@ int main(){
         le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);      
 
     }
+
+    ImprimeListaRot(listaRot);
 
 
     //fechando arquivo

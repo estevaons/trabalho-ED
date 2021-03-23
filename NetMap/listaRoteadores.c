@@ -50,22 +50,28 @@ int verificaRoteador(Celula_R* cel,ListaRot* lista){
     return existe;
 }
 
-ListaRot* CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){
+void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){
+   
     Celula_R* nova = (Celula_R*)malloc(sizeof(Celula_R));
+    
 
     nova->rot = CriaRoteador(idRot,nomeRot,nomeOperadora);
+    
 
     nova->prox = NULL;
-    lista->ult->prox = nova;
-    lista->ult = nova;
-
-    if(lista->prim==NULL){
-        lista->prim = nova;
+    
+    if(lista->prim != NULL){
+        lista->ult->prox= nova;
     }
+    else{
+        lista->prim = nova;
+        lista->ult = nova;
+    }
+    
+  
 
     lista->tamanho = lista->tamanho + 1;
 
-    return lista;
 }
 
 void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){  
