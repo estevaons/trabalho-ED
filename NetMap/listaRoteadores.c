@@ -114,6 +114,7 @@ void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
 
 Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
     Celula_R* p;
+
     int existeRot = 0;
     int listaVazia = 1;
 
@@ -125,11 +126,11 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
         }
     }
     if(existeRot==0 && listaVazia == 0){
-        fprintf(log,"ERRO: Roteador %s inexistente no NetMap!\n",nomeRot);              
+        fprintf(log,"ERRO: Roteador %s inexistente no NetMap!\n",nomeRot);            
     }
 
     else if(listaVazia == 1){
-        fprintf(log,"O NetMap não contém roteadores.\n");       
+        fprintf(log,"O NetMap não contém roteadores.\n");    
     }
 }
 
@@ -137,45 +138,46 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     Celula_R* p = listaR->prim;
     Celula_R* ant = NULL;
 
-    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRot(cel))){
-        ant = p;
-        p = p->prox;
-    }
 
-    if(p == listaR->prim && p == listaR->ult){ // unica celula
-        listaR->prim = listaR->ult = NULL;
-    }
+    // while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRot(cel))){
+    //     ant = p;
+    //     p = p->prox;
+    // }
 
-    else if(p == listaR->prim){ // se for a primeira celula
-        listaR->prim = p->prox;
-    }
+    // if(p == listaR->prim && p == listaR->ult){ // unica celula
+    //     listaR->prim = listaR->ult = NULL;
+    // }
 
-    else if(p == listaR->ult){ // se for a ultima celula
-        listaR->ult = ant;
-        listaR->ult->prox = NULL;
-    } 
+    // else if(p == listaR->prim){ // se for a primeira celula
+    //     listaR->prim = p->prox;
+    // }
 
-    else{ // caso comum
-        ant->prox = p->prox;
-    }
+    // else if(p == listaR->ult){ // se for a ultima celula
+    //     listaR->ult = ant;
+    //     listaR->ult->prox = NULL;
+    // } 
 
-    Celula_E* celE;
-    Roteador* rot = retornaRot(cel);
-    Roteador* rotCel_E = retornaRotEnlaces(celE);
-    rotCel_E = rot;
+    // else{ // caso comum
+    //     ant->prox = p->prox;
+    // }
 
-    Enlaces* listaEnlaces = retornaEnlaces(rot);
-    Enlaces* listaEnlacesP;
+    // Celula_E* celE;
+    // Roteador* rot = retornaRot(cel);
+    // Roteador* rotCel_E = retornaRotEnlaces(celE);
+    // rotCel_E = rot;
 
-    Celula_E* q;
+    // Enlaces* listaEnlaces = retornaEnlaces(rot);
+    // Enlaces* listaEnlacesP;
 
-    for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;q = retornaProxEnlaces(q)){
-        listaEnlacesP = retornaEnlaces(retornaRotEnlaces(q));
-        RemoveRoteadorEnlaces(celE,listaEnlacesP);
-    }
+    // Celula_E* q;
 
-    LiberaListaEnlaces(listaEnlacesP);
-    free(p);
+    // for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;q = retornaProxEnlaces(q)){
+    //     listaEnlacesP = retornaEnlaces(retornaRotEnlaces(q));
+    //     RemoveRoteadorEnlaces(celE,listaEnlacesP);
+    // }
+
+    // LiberaListaEnlaces(listaEnlacesP);
+    // free(p);
 
 }
 

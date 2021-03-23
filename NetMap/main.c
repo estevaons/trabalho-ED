@@ -37,14 +37,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
        
         
-        *idRot++;
+        *idRot = *idRot+1;
     
     }
     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
-    
-    //    RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
-      
+
+        
+        RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
+        printf("aobaa");
     }
 
     if(strcmp(instrucao,"CONECTAROTEADORES")==0){
@@ -104,10 +105,11 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",locTerm);
 
         
+        idTERM = *idTerm;
 
         CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
         
-
+        *idTerm = *idTerm+1;
         
       
     }
@@ -199,7 +201,6 @@ int main(){
         le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);      
 
     }
-
 
     
 
