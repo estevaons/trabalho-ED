@@ -13,8 +13,6 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     char nomeOperadora[100];
     char nomeLoc[100];
     char nomeTerm[100];
-    char locTerm[100];
-
     int idROT,idTERM;
     
 
@@ -37,15 +35,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         *idRot = *idRot+1;
     
     }
-    if(strcmp(instrucao,"REMOVEROTEADOR")==0){
-        fscanf(entrada,"%s",nomeRot);
+     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
+        fscanf(entrada,"%s",nomeRot);     
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
 
         if (celR !=NULL){
-            RemoveRoteador(celR,listaROT);    // executar remove roteador  
-            ImprimeListaRot(listaROT); 
-            printf("--------------------------------------------\n");
+            RemoveRoteador(celR,listaROT);    // executar remove roteador 
+            //ImprimeListaRot(listaROT); 
+            //printf("-------------------------------------------------------\n");         
         }
 
         
@@ -60,7 +58,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // cel1 = buscaCelRot(nomeRot1,listaROT,log);
         // cel2 = buscaCelRot(nomeRot2,listaROT,log);
- 
+
         // executar conecta roteadoresElaces
 
         // if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
@@ -101,20 +99,6 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
         // }
        
-    }
-
-    if(strcmp(instrucao,"CADASTRATERMINAL")==0){
-        fscanf(entrada,"%s",nomeTerm);
-        fscanf(entrada,"%s",locTerm);
-
-        
-        idTERM = *idTerm;
-
-        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
-        
-        *idTerm = *idTerm+1;
-        
-      
     }
 
     if(strcmp(instrucao,"DESCONECTATERMINAL")==0){
@@ -205,7 +189,7 @@ int main(){
 
     }
 
-    
+    //ImprimeListaRot(listaRot);
 
 
     //fechando arquivo
