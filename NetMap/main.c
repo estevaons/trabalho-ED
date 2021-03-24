@@ -36,7 +36,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         *idRot = *idRot+1;
     
     }
-     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
+    if(strcmp(instrucao,"REMOVEROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot); 
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
@@ -46,6 +46,22 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         }
 
         
+    }
+
+    if(strcmp(instrucao,"CADASTRATERMINAL")==0){
+        fscanf(entrada,"%s",nomeTerm);
+        fscanf(entrada,"%s",locTerm);
+        
+        idTERM = *idTerm;
+        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
+        *idTerm = *idTerm +1;
+
+    }
+    if(strcmp(instrucao,"REMOVETERMINAL")==0){
+        fscanf(entrada,"%s",nomeTerm);
+
+        // executar remove terminal
+        RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
     if(strcmp(instrucao,"CONECTAROTEADORES")==0){
@@ -125,12 +141,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     }
   
 
-    if(strcmp(instrucao,"REMOVETERMINAL")==0){
-        fscanf(entrada,"%s",nomeTerm);
 
-        // executar remove terminal
-        RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
-    }
 
     if(strcmp(instrucao,"CONECTATERMINAL")==0){
         fscanf(entrada,"%s",nomeTerm1);
@@ -149,15 +160,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         //EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida);
     }
 
-    if(strcmp(instrucao,"CADASTRATERMINAL")==0){
-        fscanf(entrada,"%s",nomeTerm);
-        fscanf(entrada,"%s",locTerm);
-        
-        idTERM = *idTerm;
-        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
-        *idTerm = *idTerm +1;
 
-    }
 
     if(strcmp(instrucao,"FIM")==0){
         // printf("PROGRAMA TERMINANDO !!!\n");
@@ -196,9 +199,9 @@ int main(){
         le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);      
 
     }
-    printf("funcionando\n");
+    printf("TEMOS PROBLEMA NO CRIAENLACEROT\n");
     //ImprimeListaRot(listaRot);
-    ImprimeListaTerm(listaTerm);
+    //ImprimeListaTerm(listaTerm);
     
 
     

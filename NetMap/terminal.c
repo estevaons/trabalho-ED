@@ -46,11 +46,15 @@ void ImprimeTerminal(Terminal* term){
     char* nome;
 
     Roteador* rot;
+    
     if(term->rot != NULL){
         rot = retornaRot(term->rot);
         nome = retornaNomeRot(rot);
+
+    }else{
+        nome = "NULO";
     }
-   
+    
 
     printf("Nome do terminal : %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s\n",term->nome,term->id,term->loc,nome);
 }
