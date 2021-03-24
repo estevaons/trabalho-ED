@@ -33,9 +33,6 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         // executar cadastra roteador
         idROT = *idRot;
         CadastraRoteador(listaROT,idROT,nomeRot,nomeOperadora);
-
-
-       
         
         *idRot = *idRot+1;
     
@@ -43,9 +40,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     if(strcmp(instrucao,"REMOVEROTEADOR")==0){
         fscanf(entrada,"%s",nomeRot);
 
+        Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
+
+        if (celR !=NULL){
+            RemoveRoteador(celR,listaROT);    // executar remove roteador  
+            ImprimeListaRot(listaROT); 
+            printf("--------------------------------------------\n");
+        }
+
         
-        RemoveRoteador(buscaCelRot(nomeRot,listaROT,log),listaROT);     // executar remove roteador
-        printf("aobaa");
     }
 
     if(strcmp(instrucao,"CONECTAROTEADORES")==0){
@@ -57,7 +60,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // cel1 = buscaCelRot(nomeRot1,listaROT,log);
         // cel2 = buscaCelRot(nomeRot2,listaROT,log);
-
+ 
         // executar conecta roteadoresElaces
 
         // if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){

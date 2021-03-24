@@ -120,17 +120,20 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
 
     for(p=lista->prim;p!=NULL;p=p->prox){
         listaVazia = 0;
-        if(strcmp(retornaNomeRot(p->rot),nomeRot)==0){
+        if(strcmp(retornaNomeRot(p->rot),nomeRot)==0){          
             return p;
             existeRot = 1;
         }
     }
     if(existeRot==0 && listaVazia == 0){
-        fprintf(log,"ERRO: Roteador %s inexistente no NetMap!\n",nomeRot);            
+        printf("ERRO: Roteador %s inexistente no NetMap!\n",nomeRot); // *********************
+        fprintf(log,"ERRO: Roteador %s inexistente no NetMap!\n",nomeRot);
+        return NULL;            
     }
 
     else if(listaVazia == 1){
-        fprintf(log,"O NetMap não contém roteadores.\n");    
+        fprintf(log,"O NetMap não contém roteadores.\n"); 
+        return NULL;   
     }
 }
 
@@ -138,46 +141,54 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     Celula_R* p = listaR->prim;
     Celula_R* ant = NULL;
 
+    int idP = retornaIdRot(p->rot);
 
-    // while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRot(cel))){
-    //     ant = p;
-    //     p = p->prox;
-    // }
+    
+    Roteador* rotCel = retornaRot(cel); 
+    int idCel = retornaIdRot(rotCel);
 
-    // if(p == listaR->prim && p == listaR->ult){ // unica celula
-    //     listaR->prim = listaR->ult = NULL;
-    // }
+    while(p!=NULL && idP != idCel){
+        ant = p;
+        p = p->prox;
+    } 
 
-    // else if(p == listaR->prim){ // se for a primeira celula
-    //     listaR->prim = p->prox;
-    // }
+    if(p == listaR->prim && p == listaR->ult){ // unica celula
+        listaR->prim = listaR->ult = NULL;
+    }
 
-    // else if(p == listaR->ult){ // se for a ultima celula
-    //     listaR->ult = ant;
-    //     listaR->ult->prox = NULL;
-    // } 
+    else if(p == listaR->prim){ // se for a primeira celula
+        listaR->prim = p->prox;
+    }
 
-    // else{ // caso comum
-    //     ant->prox = p->prox;
-    // }
+    else if(p == listaR->ult){ // se for a ultima celula
+        listaR->ult = ant;
+        listaR->ult->prox = NULL;
+    } 
 
-    // Celula_E* celE;
-    // Roteador* rot = retornaRot(cel);
-    // Roteador* rotCel_E = retornaRotEnlaces(celE);
-    // rotCel_E = rot;
+     else{ // caso comum
+        Celula_R* c1 = ant->prox;
+        printf("entro errado");
+        //Celula_R* c2 = p->prox; // ******************************* ERRO  
+        //c1 = c2;    
+    } 
 
-    // Enlaces* listaEnlaces = retornaEnlaces(rot);
-    // Enlaces* listaEnlacesP;
+    Celula_E* celE;
+    Roteador* rot = retornaRot(cel);
+    Roteador* rotCel_E = retornaRotEnlaces(celE);
+    rotCel_E = rot;
 
-    // Celula_E* q;
+    Enlaces* listaEnlaces = retornaEnlaces(rot);
+    Enlaces* listaEnlacesP;
 
-    // for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;q = retornaProxEnlaces(q)){
-    //     listaEnlacesP = retornaEnlaces(retornaRotEnlaces(q));
-    //     RemoveRoteadorEnlaces(celE,listaEnlacesP);
-    // }
+    Celula_E* q;
 
-    // LiberaListaEnlaces(listaEnlacesP);
-    // free(p);
+    for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;q = retornaProxEnlaces(q)){
+        listaEnlacesP = retornaEnlaces(retornaRotEnlaces(q));
+        RemoveRoteadorEnlaces(celE,listaEnlacesP);
+    }
+
+    LiberaListaEnlaces(listaEnlacesP); 
+    free(p); 
 
 }
 
