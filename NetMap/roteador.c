@@ -14,6 +14,7 @@ struct roteador{
 
 Enlaces* retornaEnlaces(Roteador* rot){
     return rot->listaEnlaces;
+
 }
 
 
@@ -43,7 +44,10 @@ char* retornaOperadoraRot(Roteador* rot){
 
 
 void ImprimeRoteador(Roteador* rot){
+        
     printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);
+    
+    
 }
 
 void LiberaRoteador(Roteador* rot){
@@ -128,11 +132,15 @@ Roteador* retornaRotEnlaces(Celula_E* cel){
 
 Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){
     cel->prox = NULL;
-    listaEnlaces->ult->prox = cel;
-    listaEnlaces->ult = cel;
 
-    if(listaEnlaces->prim==NULL){
+
+    if(listaEnlaces->prim != NULL){
+        listaEnlaces->ult->prox = cel;
+        listaEnlaces->ult = cel;
+    }
+    else{
         listaEnlaces->prim = cel;
+        listaEnlaces->ult = cel;
     }
 
     listaEnlaces->tamanho = (listaEnlaces->tamanho) + 1;

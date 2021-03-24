@@ -1,1 +1,0 @@
-ERRO: Roteador Rot10 inexistente no NetMap!

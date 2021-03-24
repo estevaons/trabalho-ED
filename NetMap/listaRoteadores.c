@@ -77,20 +77,30 @@ void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperador
 
 void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){  
     Celula_E* nova1 = (Celula_E*)malloc(sizeof(tamanhoCelE()));
+
     Roteador* rot1 = retornaRotEnlaces(nova1);
-    rot1 = retornaRot(cel1);  
+    rot1 = retornaRot(cel1);
+    
 
     Celula_E* nova2 = (Celula_E*)malloc(sizeof(tamanhoCelE()));
+
     Roteador* rot2 = retornaRotEnlaces(nova2);
     rot2 = retornaRot(cel2);
 
+    // Enlaces* listaEnlacesROTEADOR1 = criaListaEnlaces();
+    // Enlaces* listaEnlacesROTEADOR2 = criaListaEnlaces();
 
-    Enlaces* listaEnlaces1 = retornaEnlaces(retornaRot(cel1));
-    Enlaces* listaEnlaces2 = retornaEnlaces(retornaRot(cel2));
+    Enlaces* listaEnlacesROTEADOR1 = retornaEnlaces(retornaRot(cel1));
+    Enlaces* listaEnlacesROTEADOR2 = retornaEnlaces(retornaRot(cel2));
 
-    listaEnlaces1 = CadastraRoteadorEnlaces(listaEnlaces1, nova2);
 
-    listaEnlaces2 = CadastraRoteadorEnlaces(listaEnlaces2, nova1);
+    listaEnlacesROTEADOR1 = CadastraRoteadorEnlaces(listaEnlacesROTEADOR1, nova2);
+
+
+
+    listaEnlacesROTEADOR2 = CadastraRoteadorEnlaces(listaEnlacesROTEADOR2, nova1);
+
+    ImprimeListaEnlaces(listaEnlacesROTEADOR1);
    
 }
 
@@ -126,7 +136,6 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
         }
     }
     if(existeRot==0 && listaVazia == 0){
-        printf("ERRO: Roteador %s inexistente no NetMap!\n",nomeRot); // *********************
         fprintf(log,"ERRO: Roteador %s inexistente no NetMap!\n",nomeRot);
         return NULL;            
     }

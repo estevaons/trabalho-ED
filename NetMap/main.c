@@ -13,6 +13,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     char nomeOperadora[100];
     char nomeLoc[100];
     char nomeTerm[100];
+    char locTerm[100];
     int idROT,idTERM;
     
 
@@ -36,14 +37,12 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     
     }
      if(strcmp(instrucao,"REMOVEROTEADOR")==0){
-        fscanf(entrada,"%s",nomeRot);     
+        fscanf(entrada,"%s",nomeRot); 
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
 
         if (celR !=NULL){
-            RemoveRoteador(celR,listaROT);    // executar remove roteador 
-            //ImprimeListaRot(listaROT); 
-            //printf("-------------------------------------------------------\n");         
+            RemoveRoteador(celR,listaROT);    // executar remove roteador      
         }
 
         
@@ -59,7 +58,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         // cel1 = buscaCelRot(nomeRot1,listaROT,log);
         // cel2 = buscaCelRot(nomeRot2,listaROT,log);
 
-        // executar conecta roteadoresElaces
+        // //executar conecta roteadoresElaces
 
         // if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
         //     ConectaRoteadoresEnlaces(cel1, cel2);
@@ -130,7 +129,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm);
 
         // executar remove terminal
-        // RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
+        RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
     if(strcmp(instrucao,"CONECTATERMINAL")==0){
@@ -150,6 +149,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         //EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida);
     }
 
+    if(strcmp(instrucao,"CADASTRATERMINAL")==0){
+        fscanf(entrada,"%s",nomeTerm);
+        fscanf(entrada,"%s",locTerm);
+        
+        idTERM = *idTerm;
+        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
+        *idTerm = *idTerm +1;
+
+    }
 
     if(strcmp(instrucao,"FIM")==0){
         // printf("PROGRAMA TERMINANDO !!!\n");
@@ -188,9 +196,12 @@ int main(){
         le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);      
 
     }
-
+    printf("funcionando\n");
     //ImprimeListaRot(listaRot);
+    ImprimeListaTerm(listaTerm);
+    
 
+    
 
     //fechando arquivo
     fclose(entrada);
