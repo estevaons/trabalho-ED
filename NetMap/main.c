@@ -53,7 +53,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",locTerm);
         
         idTERM = *idTerm;
-        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
+        //CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
         *idTerm = *idTerm +1;
 
     }
@@ -61,7 +61,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm);
 
         // executar remove terminal
-        RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
+        //RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
     if(strcmp(instrucao,"CONECTAROTEADORES")==0){
@@ -94,7 +94,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         
         // executar conecta terminal
         // PRITAR ROT CONECTADO AO TERMINAL!!!
-        ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
+        //ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
     }
 
     if(strcmp(instrucao,"IMPRIMENETMAP")==0){
@@ -199,11 +199,13 @@ int main(){
 
     while(!feof(entrada)){
 
-        le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);      
+        le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);     
+
 
     }
-    printf("TRATANDO CONECTA TERMINAL\n");
-    //ImprimeListaRot(listaRot);
+ 
+
+    
     //ImprimeListaTerm(listaTerm);
 
     

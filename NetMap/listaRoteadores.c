@@ -54,7 +54,7 @@ int verificaRoteador(Celula_R* cel,ListaRot* lista){
 
 
 
-void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){
+void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){ // CERTO
    
     Celula_R* nova = (Celula_R*)malloc(sizeof(Celula_R));
     
@@ -126,9 +126,9 @@ void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
     Enlaces* listaEnlaces1 = retornaEnlaces(rot1);
     Enlaces* listaEnlaces2 = retornaEnlaces(rot2);
 
-    Celula_E* cel_E_lista1 = buscaRoteadorEnlaces(rot2,listaEnlaces1,log,rot1);
+    Celula_E* cel_E_lista1 = buscaRoteadorEnlaces(rot2,listaEnlaces1);
     
-    Celula_E* cel_E_lista2 = buscaRoteadorEnlaces(rot1,listaEnlaces2,log,rot2);
+    Celula_E* cel_E_lista2 = buscaRoteadorEnlaces(rot1,listaEnlaces2);
 
 
     RemoveRoteadorEnlaces(cel_E_lista1,listaEnlaces2); // remover uma celula_E de uma lista de enlaces de um roteador
@@ -169,6 +169,7 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     
     Roteador* rotCel = retornaRot(cel); 
     int idCel = retornaIdRot(rotCel);
+    Enlaces* enlacesCelR = retornaEnlaces(rotCel);
 
     while(p->prox!=NULL && idP != idCel){
         ant = p;
@@ -194,7 +195,38 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
         ant->prox = p->prox;            
     } 
 
-    Celula_E* celE;
+    Celula_R* andaListaRot;
+    
+
+    for(andaListaRot=listaR->prim;andaListaRot!=NULL;andaListaRot=andaListaRot->prox){ // ANDA NA LISTA DE ROTEADORES
+        Roteador* rot1 = retornaRot(andaListaRot); // PEGA O ROTEADOR DA CELULA R ANALISADA
+        Enlaces* listaEnlaces = retornaEnlaces(rot1); // PEGA A LISTA DE ENLACES DO ROTEADOR ANALISADO
+
+        Celula_E* celE = buscaRoteadorEnlaces(rotCel,listaEnlaces); // BUSCA O ROTEADOR REMOVIDO NA LISTA DE ENLACES DO ROTEADOR ANALISADO
+
+        printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
+        ImprimeListaEnlaces(listaEnlaces);
+        printf("-------------------------------------------------------------------\n");
+        
+        if(celE!=NULL){ // SE O ROTEADOR FOR ENCONTRADO NA LISTA DE ENLACES
+            RemoveRoteadorEnlaces(celE,listaEnlaces); // REMOVE A CELULA E DA LISTA DE ENLACES DO ROTEADOR ANALISADO
+        } 
+
+        printf("LISTA ENLACES DEPOIS DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
+        ImprimeListaEnlaces(listaEnlaces);
+         printf("-------------------------------------------------------------------\n");
+    }
+
+    LiberaListaEnlaces(enlacesCelR);
+
+    free(p);
+
+
+
+
+
+
+    /*Celula_E* celE;
     Roteador* rotCel_E = retornaRotEnlaces(celE);
 
     rotCel_E = rotCel;
@@ -216,7 +248,9 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
     if(existeEnlaces==1){
         LiberaListaEnlaces(listaEnlacesQ); // ERRO!
     }
-    free(p); 
+    free(p); */
+
+    
 
 }
 

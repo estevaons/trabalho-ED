@@ -94,7 +94,7 @@ Celula_E* retornaProxEnlaces(Celula_E* cel){
     return cel->prox;
 }
 
-Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador* rot2){
+Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista){
     int idRot = retornaIdRot(rot);
 
     Celula_E* p;
@@ -111,12 +111,12 @@ Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador
         }
     }
     if(existeRot==0 && listaVazia == 0){
-        fprintf(log,"ERRO: O roteador %s nao esta conectado com o roteador %s.\n",retornaNomeRot(rot),retornaNomeRot(rot2));   
+        //fprintf(log,"ERRO: O roteador %s nao esta conectado com o roteador %s.\n",retornaNomeRot(rot),retornaNomeRot(rot2));   
         return NULL;           
      }
 
     else if(listaVazia == 1){
-        fprintf(log,"O roteador %s nao possui conexoes.\n",retornaNomeRot(rot2)); 
+        //fprintf(log,"O roteador %s nao possui conexoes.\n",retornaNomeRot(rot2)); 
         return NULL;      
      }
 }
