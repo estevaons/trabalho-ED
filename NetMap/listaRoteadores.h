@@ -15,6 +15,8 @@ typedef struct ListaDeRoteadores ListaRot;
 
 ListaRot* CriaListaRot(); // cria a lista de roteadores
 
+
+
 void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora);// Cadastra o roteador na lista de roteadores
 
 void RemoveRoteador(Celula_R* cel,ListaRot* listaR);// Remove o roteador da lista de roteadores

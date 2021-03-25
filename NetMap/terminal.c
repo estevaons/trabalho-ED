@@ -44,13 +44,12 @@ char* retornaLocTerm(Terminal* term){
 
 void ImprimeTerminal(Terminal* term){ 
     char* nome;
-
+    
     Roteador* rot;
     
     if(term->rot != NULL){
         rot = retornaRot(term->rot);
         nome = retornaNomeRot(rot);
-
     }else{
         nome = "NULO";
     }

@@ -12,6 +12,7 @@ typedef struct enlaces Enlaces;
 
 typedef struct celula_e Celula_E;
 
+
 void adicionaRotCelE(Celula_E* cel, Roteador* roteador);
 
 Enlaces* criaListaEnlaces(); // cria a lista de enlaces de um roteador

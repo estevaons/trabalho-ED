@@ -88,6 +88,15 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     
     }
 
+    if(strcmp(instrucao,"CONECTATERMINAL")==0){
+        fscanf(entrada,"%s",nomeTerm1);
+        fscanf(entrada,"%s",nomeRot);
+        
+        // executar conecta terminal
+        // PRITAR ROT CONECTADO AO TERMINAL!!!
+        ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
+    }
+
     if(strcmp(instrucao,"IMPRIMENETMAP")==0){
 
         // executar imprime netmap
@@ -143,13 +152,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
 
 
-    if(strcmp(instrucao,"CONECTATERMINAL")==0){
-        fscanf(entrada,"%s",nomeTerm1);
-        fscanf(entrada,"%s",nomeRot);
-        
-        // executar conecta terminal
-        // ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
-    }
+
 
     if(strcmp(instrucao,"ENVIARPACOTESDADOS")==0){
         fscanf(entrada,"%s",nomeTerm1);
@@ -199,7 +202,7 @@ int main(){
         le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);      
 
     }
-    printf("TEMOS PROBLEMA NO CRIAENLACEROT\n");
+    printf("TRATANDO CONECTA TERMINAL\n");
     //ImprimeListaRot(listaRot);
     //ImprimeListaTerm(listaTerm);
     

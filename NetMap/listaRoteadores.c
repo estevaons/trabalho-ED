@@ -33,6 +33,7 @@ ListaRot* CriaListaRot(){
     return lista;
 }
 
+
 int verificaRoteador(Celula_R* cel,ListaRot* lista){
     Celula_R* p;
     int existe = 0;
@@ -49,6 +50,8 @@ int verificaRoteador(Celula_R* cel,ListaRot* lista){
 
     return existe;
 }
+
+
 
 void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){
    
@@ -108,10 +111,10 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
 
     listaEnlacesROTEADOR2 = CadastraRoteadorEnlaces(listaEnlacesROTEADOR2, nova1);
 
-    ImprimeListaEnlaces(listaEnlacesROTEADOR1);
-    printf("-------------------\n");
-    ImprimeListaEnlaces(listaEnlacesROTEADOR2);
-    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
+    // ImprimeListaEnlaces(listaEnlacesROTEADOR1);
+    // printf("-------------------\n");
+    // ImprimeListaEnlaces(listaEnlacesROTEADOR2);
+    // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
 }
 
 void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
