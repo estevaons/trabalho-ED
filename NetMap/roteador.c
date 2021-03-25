@@ -72,6 +72,10 @@ struct enlaces{
 };
 
 
+void adicionaRotCelE(Celula_E* cel, Roteador* roteador){
+    cel->rot = roteador;
+}
+
 Celula_E* retornaPrimEnlaces(Enlaces* enlaces){
     return enlaces->prim;
 }
@@ -139,6 +143,7 @@ Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){
         listaEnlaces->ult = cel;
     }
     else{
+        
         listaEnlaces->prim = cel;
         listaEnlaces->ult = cel;
     }

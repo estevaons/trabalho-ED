@@ -80,28 +80,38 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
 
     Roteador* rot1 = retornaRotEnlaces(nova1);
     rot1 = retornaRot(cel1);
-    
+    adicionaRotCelE(nova1,rot1);
+    // nova1->rot = rot1;
 
     Celula_E* nova2 = (Celula_E*)malloc(sizeof(tamanhoCelE()));
 
     Roteador* rot2 = retornaRotEnlaces(nova2);
     rot2 = retornaRot(cel2);
+    adicionaRotCelE(nova2,rot2);
+    // nova2->rot = rot2;
 
     // Enlaces* listaEnlacesROTEADOR1 = criaListaEnlaces();
     // Enlaces* listaEnlacesROTEADOR2 = criaListaEnlaces();
 
-    Enlaces* listaEnlacesROTEADOR1 = retornaEnlaces(retornaRot(cel1));
-    Enlaces* listaEnlacesROTEADOR2 = retornaEnlaces(retornaRot(cel2));
+    Enlaces* listaEnlacesROTEADOR1 = retornaEnlaces(rot1);
+    Enlaces* listaEnlacesROTEADOR2 = retornaEnlaces(rot2);
+
 
 
     listaEnlacesROTEADOR1 = CadastraRoteadorEnlaces(listaEnlacesROTEADOR1, nova2);
+    
+    Roteador * roteTESTE = retornaRotEnlaces(retornaPrimEnlaces(listaEnlacesROTEADOR1));
 
-
+    if(roteTESTE ==NULL){
+        printf(" SOU NULL\n");
+    }
 
     listaEnlacesROTEADOR2 = CadastraRoteadorEnlaces(listaEnlacesROTEADOR2, nova1);
 
     ImprimeListaEnlaces(listaEnlacesROTEADOR1);
-   
+    printf("-------------------\n");
+    ImprimeListaEnlaces(listaEnlacesROTEADOR2);
+    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
 }
 
 void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){

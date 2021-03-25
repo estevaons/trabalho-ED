@@ -12,6 +12,8 @@ typedef struct enlaces Enlaces;
 
 typedef struct celula_e Celula_E;
 
+void adicionaRotCelE(Celula_E* cel, Roteador* roteador);
+
 Enlaces* criaListaEnlaces(); // cria a lista de enlaces de um roteador
 
 Celula_E* retornaPrimEnlaces(Enlaces* enlaces); // retorna a primeira celula da lista de enlaces de um roteador
