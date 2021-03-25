@@ -34,6 +34,7 @@ ListaRot* CriaListaRot(){
 }
 
 
+
 int verificaRoteador(Celula_R* cel,ListaRot* lista){
     Celula_R* p;
     int existe = 0;

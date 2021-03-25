@@ -10,6 +10,7 @@ typedef struct roteador Roteador;
 
 typedef struct enlaces Enlaces;
 
+
 typedef struct celula_e Celula_E;
 
 

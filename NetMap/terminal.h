@@ -9,6 +9,7 @@
 #include <stddef.h>
 
 
+
 typedef struct terminal Terminal;
 
 Terminal* CriaTerminal(int id,char* nome,char* loc); // Cria um terminal novo

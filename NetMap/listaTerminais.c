@@ -73,6 +73,7 @@ void ConectaTerminal(Celula_T* celT,Celula_R* celR){
 
 
 
+
 }
 
 

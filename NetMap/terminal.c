@@ -42,6 +42,8 @@ char* retornaLocTerm(Terminal* term){
 }
 
 
+
+
 void ImprimeTerminal(Terminal* term){ 
     char* nome;
     

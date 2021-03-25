@@ -19,6 +19,7 @@ Enlaces* retornaEnlaces(Roteador* rot){
 
 
 
+
 Roteador* CriaRoteador(int id,char* nome,char* operadora){
     Roteador* rot = (Roteador*)malloc(sizeof(Roteador));
 

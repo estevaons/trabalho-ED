@@ -205,7 +205,6 @@ int main(){
     printf("TRATANDO CONECTA TERMINAL\n");
     //ImprimeListaRot(listaRot);
     //ImprimeListaTerm(listaTerm);
-    
 
     
 
@@ -214,3 +213,4 @@ int main(){
 
     return 0;
 }
+

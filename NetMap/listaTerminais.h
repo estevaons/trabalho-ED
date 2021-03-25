@@ -30,3 +30,4 @@ Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log); // busca
 void LiberaListaTerm(ListaTerm* listaT); // Libera a lista de terminais
 
 #endif
+

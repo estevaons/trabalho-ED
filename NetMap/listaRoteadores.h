@@ -8,6 +8,7 @@
 
 
 
+
 typedef struct celula_r Celula_R;
 
 typedef struct ListaDeRoteadores ListaRot;
