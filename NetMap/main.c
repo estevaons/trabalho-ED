@@ -24,7 +24,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     
 
     fscanf(entrada,"%s",instrucao);
-    if(strcmp(instrucao,"CADASTRAROTEADOR")==0){
+    if(strcmp(instrucao,"CADASTRAROTEADOR")==0){ // OK !
         fscanf(entrada,"%s",nomeRot);
         fscanf(entrada,"%s",nomeOperadora);  
         
@@ -36,24 +36,24 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         *idRot = *idRot+1;
     
     }
-    if(strcmp(instrucao,"REMOVEROTEADOR")==0){
-        fscanf(entrada,"%s",nomeRot); 
+    if(strcmp(instrucao,"REMOVEROTEADOR")==0){ // OK!
+        /*fscanf(entrada,"%s",nomeRot); 
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
 
         if (celR !=NULL){
             RemoveRoteador(celR,listaROT);    // executar remove roteador      
         }
-
+        */
         
     }
 
-    if(strcmp(instrucao,"CADASTRATERMINAL")==0){
+    if(strcmp(instrucao,"CADASTRATERMINAL")==0){ // OK!
         fscanf(entrada,"%s",nomeTerm);
         fscanf(entrada,"%s",locTerm);
         
         idTERM = *idTerm;
-        //CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
+        CadastraTerminal(idTERM,nomeTerm,locTerm,listaTERM);
         *idTerm = *idTerm +1;
 
     }
@@ -64,11 +64,11 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         //RemoveTerminal(buscaCelTerminal(nomeTerm,listaTERM,log),listaTERM,log);
     }
 
-    if(strcmp(instrucao,"CONECTAROTEADORES")==0){
+    if(strcmp(instrucao,"CONECTAROTEADORES")==0){ // OK !
         fscanf(entrada,"%s",nomeRot1);
         fscanf(entrada,"%s",nomeRot2);
 
-        Celula_R* cel1;
+       /* Celula_R* cel1;
         Celula_R* cel2;
 
         cel1 = buscaCelRot(nomeRot1,listaROT,log);
@@ -83,7 +83,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
             fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
         }else if(verificaRoteador(cel2,listaROT)==0){
             fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
-        }
+        } */
 
     
     }
@@ -94,7 +94,17 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         
         // executar conecta terminal
         // PRITAR ROT CONECTADO AO TERMINAL!!!
-        //ConectaTerminal(buscaCelTerminal(nomeTerm1,listaTERM,log), buscaCelRot(nomeRot,listaROT,log));
+        Celula_T* celT = buscaCelTerminal(nomeTerm1,listaTERM,log);
+
+        Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
+
+        if(celT != NULL && celR != NULL){  
+            ImprimeRoteador(retornaRot(celR));
+            printf("---------------------\n");
+            ImprimeTerminal(retornaTerm(celT));
+            printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+            ConectaTerminal(celT,celR);
+        }
     }
 
     if(strcmp(instrucao,"IMPRIMENETMAP")==0){
@@ -203,8 +213,6 @@ int main(){
 
 
     }
- 
-
     
     //ImprimeListaTerm(listaTerm);
 

@@ -144,7 +144,7 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
 
     for(p=lista->prim;p!=NULL;p=p->prox){
         listaVazia = 0;
-        if(strcmp(retornaNomeRot(p->rot),nomeRot)==0){          
+        if(strcmp(retornaNomeRot(p->rot),nomeRot)==0){                             
             return p;
             existeRot = 1;
         }
@@ -204,53 +204,22 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
 
         Celula_E* celE = buscaRoteadorEnlaces(rotCel,listaEnlaces); // BUSCA O ROTEADOR REMOVIDO NA LISTA DE ENLACES DO ROTEADOR ANALISADO
 
-        printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
-        ImprimeListaEnlaces(listaEnlaces);
-        printf("-------------------------------------------------------------------\n");
+        //printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
+        //ImprimeListaEnlaces(listaEnlaces);
+        //printf("-------------------------------------------------------------------\n");
         
         if(celE!=NULL){ // SE O ROTEADOR FOR ENCONTRADO NA LISTA DE ENLACES
             RemoveRoteadorEnlaces(celE,listaEnlaces); // REMOVE A CELULA E DA LISTA DE ENLACES DO ROTEADOR ANALISADO
         } 
 
-        printf("LISTA ENLACES DEPOIS DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
-        ImprimeListaEnlaces(listaEnlaces);
-         printf("-------------------------------------------------------------------\n");
+        //printf("LISTA ENLACES DEPOIS DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
+        //ImprimeListaEnlaces(listaEnlaces);
+         //printf("-------------------------------------------------------------------\n");
     }
 
     LiberaListaEnlaces(enlacesCelR);
 
     free(p);
-
-
-
-
-
-
-    /*Celula_E* celE;
-    Roteador* rotCel_E = retornaRotEnlaces(celE);
-
-    rotCel_E = rotCel;
-
-    Enlaces* listaEnlaces = retornaEnlaces(rotCel_E);
-    Enlaces* listaEnlacesQ;
-
-    Celula_E* q;
-    q=retornaPrimEnlaces(listaEnlaces); // APONTANDO P NULL
-    
-    for(q=retornaPrimEnlaces(listaEnlaces);q!=NULL;q = retornaProxEnlaces(q)){
-        listaEnlacesQ = retornaEnlaces(retornaRotEnlaces(q));
-        ImprimeListaEnlaces(listaEnlacesQ);
-        existeEnlaces = 1;
-        RemoveRoteadorEnlaces(celE,listaEnlacesQ);
-        printf("---------------------------------------\n");
-        ImprimeListaEnlaces(listaEnlacesQ);
-    }
-    if(existeEnlaces==1){
-        LiberaListaEnlaces(listaEnlacesQ); // ERRO!
-    }
-    free(p); */
-
-    
 
 }
 

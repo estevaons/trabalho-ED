@@ -49,33 +49,32 @@ Terminal* retornaTerm(Celula_T* cel){
 }
 
 void ConectaTerminal(Celula_T* celT,Celula_R* celR){
+
+    Terminal* term = retornaTerm(celT);
+
     
-    if(celT != NULL){
-        char * nome1;
-        char * nome2;
-        Terminal* term = retornaTerm(celT);
 
-        Celula_R* celRTerm = retornaCelRTerm(term);
+    /*Celula_R* celRTerm = retornaCelRTerm(term);
 
-        celRTerm = celR;
+    Roteador* rotTerm = retornaRot(celRTerm); // AQUI
+
+    Roteador* rotRot = retornaRot(celR);
+
+    celRTerm = celR;
+
+    rotTerm = rotRot;
 
         // printf("%s",retornaNomeRot(retornaRot(celR)));
        
         //term->celRot->rot->nome = celR->rot->nome; ERA PRA ACONTECER ISSO!!!!!!!!
 
-
         //PRINT PARA TESTES!!!
-        ImprimeTerminal(term);
-        printf("XXXXXXXXXXXXXXXXXXXXx\n");
-        ImprimeRoteador(retornaRot(celR));
-        printf("--------------\n");
-    }
-
-
-
+    ImprimeTerminal(term);
+    printf("\nEsta conectado com : \n\n");
+    ImprimeRoteador(retornaRot(celRTerm));
+    printf("--------------\n"); */
 
 }
-
 
 void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
     Celula_T* p = listaT->prim;
@@ -183,7 +182,7 @@ Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
     int listaVaziaT = 1;
     for(p=lista->prim; p!=NULL; p=p->prox){
         listaVaziaT = 0;
-        if(strcmp(retornaNomeTerm(p->term),nomeTerm)==0){
+        if(strcmp(retornaNomeTerm(p->term),nomeTerm)==0){         
             return p;
             existeTerm =1;
         }

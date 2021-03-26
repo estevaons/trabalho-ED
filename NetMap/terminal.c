@@ -15,8 +15,8 @@ Terminal* CriaTerminal(int id,char* nome,char* loc){
     Terminal* term = (Terminal*)malloc(sizeof(Terminal));
 
     term->id = id;
-    term->nome = strdup(nome);
-    term->loc = strdup(loc);
+    term->nome = strdup(nome); // lembrar de dar free
+    term->loc = strdup(loc); // lembrar de dar free
     
     term->rot = NULL;
 
@@ -46,10 +46,11 @@ char* retornaLocTerm(Terminal* term){
 
 void ImprimeTerminal(Terminal* term){ 
     char* nome;
-    
     Roteador* rot;
+
+    Celula_R* celR = term->rot;
     
-    if(term->rot != NULL){
+    if(celR != NULL){
         rot = retornaRot(term->rot);
         nome = retornaNomeRot(rot);
     }else{
