@@ -12,6 +12,8 @@
 
 typedef struct terminal Terminal;
 
+void setCelR_TERMINAL(Terminal* terminal, Celula_R* celr);
+
 Terminal* CriaTerminal(int id,char* nome,char* loc); // Cria um terminal novo
 
 int retornaIdTerm(Terminal* term); // retorna o id do terminal

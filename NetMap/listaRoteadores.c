@@ -33,7 +33,11 @@ ListaRot* CriaListaRot(){
     return lista;
 }
 
+void setCelR_ROTEADOR(Celula_R* cel1,Celula_R* cel2){
 
+    cel1 = cel2;
+
+}
 
 int verificaRoteador(Celula_R* cel,ListaRot* lista){
     Celula_R* p;
@@ -117,6 +121,11 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
     // ImprimeListaEnlaces(listaEnlacesROTEADOR2);
     // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
 }
+
+size_t retornaSizeOfCelR(){
+    return sizeof(Celula_R);
+}
+
 
 void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
 

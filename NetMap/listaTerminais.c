@@ -53,27 +53,52 @@ void ConectaTerminal(Celula_T* celT,Celula_R* celR){
     Terminal* term = retornaTerm(celT);
 
     
+    
+    setCelR_TERMINAL(term,celR);
 
-    /*Celula_R* celRTerm = retornaCelRTerm(term);
+    if(retornaCelRTerm(term)== NULL){
+        printf("impossivel");
+    }
 
-    Roteador* rotTerm = retornaRot(celRTerm); // AQUI
+    //term -> rot = celR; TA ACONTECENDO ISSO
+    // celRB = celRA;
 
-    Roteador* rotRot = retornaRot(celR);
+    // celRA = celR;
 
-    celRTerm = celR;
+    
 
-    rotTerm = rotRot;
+    // if (retornaRot(retornaCelRTerm(term))==NULL){
+    //     printf("NULL");
+    // }
 
-        // printf("%s",retornaNomeRot(retornaRot(celR)));
+    //ImprimeRoteador(retornaRot(retornaCelRTerm(term)));
+
+    // TEMOS QUE CelRA -> ROT = CelR-> ROT !!
+    
+
+    //celRTerm = celR; 
+
+
+   //ImprimeRoteador(retornaRot(celR));
+   //char* nome = retornaNomeRot(retornaRot(celRTerm));
+   //printf("nome: %s",nome);
+   //printf("----------\n");
+  
+    //Roteador* rotTerm = retornaRot(celRTerm); // AQUI
+
+    //Roteador* rotRot = retornaRot(celR);
+    
+    //rotTerm = rotRot;
        
         //term->celRot->rot->nome = celR->rot->nome; ERA PRA ACONTECER ISSO!!!!!!!!
 
         //PRINT PARA TESTES!!!
-    ImprimeTerminal(term);
-    printf("\nEsta conectado com : \n\n");
-    ImprimeRoteador(retornaRot(celRTerm));
-    printf("--------------\n"); */
-
+    //ImprimeTerminal(term);
+    // printf("\nEsta conectado com : \n\n");
+    // ImprimeRoteador(retornaRot(celRTerm));
+    //printf("--------------\n"); 
+    
+    //free(celRA);  LEMBRAR !!!!
 }
 
 void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){

@@ -99,10 +99,6 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
 
         if(celT != NULL && celR != NULL){  
-            ImprimeRoteador(retornaRot(celR));
-            printf("---------------------\n");
-            ImprimeTerminal(retornaTerm(celT));
-            printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
             ConectaTerminal(celT,celR);
         }
     }

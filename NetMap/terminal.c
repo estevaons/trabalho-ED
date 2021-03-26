@@ -17,11 +17,17 @@ Terminal* CriaTerminal(int id,char* nome,char* loc){
     term->id = id;
     term->nome = strdup(nome); // lembrar de dar free
     term->loc = strdup(loc); // lembrar de dar free
+
+    //Celula_R* rot = (Celula_R*)malloc(sizeof(retornaSizeOfCelR()));
     
     term->rot = NULL;
 
     return term;
 
+}
+
+void setCelR_TERMINAL(Terminal* terminal, Celula_R* celr){
+    setCelR_ROTEADOR(terminal->rot,celr);
 }
 
 
@@ -48,17 +54,32 @@ void ImprimeTerminal(Terminal* term){
     char* nome;
     Roteador* rot;
 
+    if(retornaCelRTerm(term)==NULL){
+        printf("fudeu");
+    } 
+
+    //rot = retornaRot(term->rot); // CELULA R SENDO NULL
+    //nome = retornaNomeRot(rot);
+    //printf("%s", nome);
+    //ImprimeRoteador(rot);
+    
+   /*if(retornaRot(term->rot)==NULL){
+       printf("sou null\n");
+   } */
+
+
     Celula_R* celR = term->rot;
     
-    if(celR != NULL){
-        rot = retornaRot(term->rot);
-        nome = retornaNomeRot(rot);
+     if(celR != NULL){
+        //rot = retornaRot(term->rot);
+        //nome = retornaNomeRot(rot);
+        
     }else{
         nome = "NULO";
-    }
+    } 
     
 
-    printf("Nome do terminal : %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s\n",term->nome,term->id,term->loc,nome);
+    // //printf("Nome do terminal : %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s\n",term->nome,term->id,term->loc,nome);
 }
 
 void LiberaTerminal(Terminal* term){
