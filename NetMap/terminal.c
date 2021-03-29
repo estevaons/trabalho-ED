@@ -28,8 +28,15 @@ Terminal* CriaTerminal(int id,char* nome,char* loc){
 
 void setCelR_TERMINAL(Terminal* terminal, Celula_R* celr){
     
-    terminal->rot = celr;
     
+    terminal->rot = celr;
+
+    Celula_R* celRTERM = retornaCelRTerm(terminal);
+
+
+    // ImprimeRoteador(retornaRot (celRTERM));
+
+    setCelR_ROTEADOR(terminal->rot,celr);
 }
 
 
@@ -56,15 +63,22 @@ void ImprimeTerminal(Terminal* term){
     char* nome;
     Roteador* rot;
 
-    nome = retornaNomeRot(retornaRot(term->rot));
+   
 
-    if(retornaCelRTerm(term)==NULL){
-        printf("Terminal sem roteador\n");
-        printf("Nome do terminal: %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: TERMINAL SEM ROTEADOR\n",term->nome,term->id,term->loc);
+    if(term->rot != NULL){
+
+        rot = retornaRot(term->rot);
+        nome = retornaNomeRot(rot);
+
+        printf("Nome do terminal: %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s\n",term->nome,term->id,term->loc,nome); 
+
+        
     }
     else{
-        printf("Nome do terminal: %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: %s\n",term->nome,term->id,term->loc,nome); 
+        printf("Nome do terminal: %s\nId do terminal: %d\nLocalização do terminal: %s\nRoteador conectado: TERMINAL SEM ROTEADOR\n",term->nome,term->id,term->loc);
     }
+
+    printf("-----------------\n");
 
     // rot = retornaRot(term->rot); // CELULA R SENDO NULL
 
