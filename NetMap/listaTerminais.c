@@ -52,7 +52,11 @@ void ConectaTerminal(Celula_T* celT,Celula_R* celR){
 
     Terminal* term = retornaTerm(celT);
 
+    Celula_R* celRTERM = retornaCelRTerm(term);
+
+     celRTERM = celR;
     
+    // ImprimeRoteador(retornaRot(celRTERM));
     
     setCelR_TERMINAL(term,celR);
 
@@ -93,7 +97,7 @@ void ConectaTerminal(Celula_T* celT,Celula_R* celR){
         //term->celRot->rot->nome = celR->rot->nome; ERA PRA ACONTECER ISSO!!!!!!!!
 
         //PRINT PARA TESTES!!!
-    //ImprimeTerminal(term);
+    ImprimeTerminal(term);
     // printf("\nEsta conectado com : \n\n");
     // ImprimeRoteador(retornaRot(celRTerm));
     //printf("--------------\n"); 
