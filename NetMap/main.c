@@ -114,22 +114,22 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeRot1);
         fscanf(entrada,"%s",nomeRot2);
 
-        // Celula_R* cel1;
-        // Celula_R* cel2;
+        Celula_R* cel1;
+        Celula_R* cel2;
 
 
-        // cel1 = buscaCelRot(nomeRot1,listaROT,log);
-        // cel2 = buscaCelRot(nomeRot2,listaROT,log);
+        cel1 = buscaCelRot(nomeRot1,listaROT,log);
+        cel2 = buscaCelRot(nomeRot2,listaROT,log);
 
-        // // executar desconecta roteadores
-        // if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
-        //     DesconectaRoteadoresEnlaces(cel1, cel2,log);
+        // executar desconecta roteadores
+        if(verificaRoteador(cel1,listaROT) && verificaRoteador(cel2,listaROT)){
+            DesconectaRoteadoresEnlaces(cel1, cel2,log);
 
-        // }else if(verificaRoteador(cel1,listaROT)==0){
-        //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
-        // }else if(verificaRoteador(cel2,listaROT)==0){
-        //     fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
-        // }
+        }else if(verificaRoteador(cel1,listaROT)==0){
+            fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel1)));
+        }else if(verificaRoteador(cel2,listaROT)==0){
+            fprintf(log,"Roteador %s inexistente no NetMap\n",retornaNomeRot(retornaRot(cel2)));
+        }
        
     }
 
@@ -138,7 +138,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar desconecta terminal
 
-        // DesconectaTerminal(buscaCelTerminal(nomeTerm,listaTERM,log));
+        DesconectaTerminal(buscaCelTerminal(nomeTerm,listaTERM,log));
 
     }
     
@@ -212,10 +212,10 @@ int main(){
 
     }
     
-    // printf("passei");
+    //printf("passei\n");
     ImprimeListaTerm(listaTerm);
 
-    ImprimeListaRot(listaRot);
+    //ImprimeListaRot(listaRot);
 
     
 

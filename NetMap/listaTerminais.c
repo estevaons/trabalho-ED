@@ -142,15 +142,11 @@ void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
 }
 
 void DesconectaTerminal(Celula_T* cel){
+
     Terminal* term = retornaTerm(cel);
-    Celula_R* celR;
-    Roteador* rotTerm;
 
-    celR = retornaCelRTerm(term);
+    setCelRTermNull(term);
 
-    rotTerm = retornaRot(celR);
-
-    rotTerm = NULL;
 }
 
 

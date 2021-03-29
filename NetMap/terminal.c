@@ -33,6 +33,9 @@ void setCelR_TERMINAL(Terminal* terminal, Celula_R* celr){
 
 }
 
+void setCelRTermNull(Terminal* term){
+    term->rot = NULL;
+}
 
 int retornaIdTerm(Terminal* term){
     return term->id;
