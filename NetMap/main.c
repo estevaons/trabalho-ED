@@ -147,14 +147,14 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
         // executar frequencia operadora
 
-        // FrequenciaOperadora(listaROT,nomeOperadora,saida);
+        FrequenciaOperadora(listaROT,nomeOperadora,saida);
     }
 
     if(strcmp(instrucao,"FREQUENCIATERMINAL")==0){
         fscanf(entrada,"%s",nomeLoc);
 
         // executar frequencia terminal
-        // FrequenciaTerminal(listaTERM,nomeLoc,saida);
+        FrequenciaTerminal(listaTERM,nomeLoc,saida);
     }
   
 
@@ -212,8 +212,8 @@ int main(){
 
     }
     
-    //printf("passei\n");
-    ImprimeListaTerm(listaTerm);
+    printf("frequencia operadora/terminal funcionando\n");
+    //ImprimeListaTerm(listaTerm);
 
     //ImprimeListaRot(listaRot);
 

@@ -235,6 +235,7 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida){ // Impr
         if(strcmp(retornaOperadoraRot(p->rot),operadora)){
             cont++;
         }
+        p = p->prox;
     }
 
 
