@@ -31,12 +31,6 @@ void setCelR_TERMINAL(Terminal* terminal, Celula_R* celr){
     
     terminal->rot = celr;
 
-    Celula_R* celRTERM = retornaCelRTerm(terminal);
-
-
-    // ImprimeRoteador(retornaRot (celRTERM));
-
-    setCelR_ROTEADOR(terminal->rot,celr);
 }
 
 

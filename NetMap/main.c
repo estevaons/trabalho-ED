@@ -212,7 +212,10 @@ int main(){
 
     }
     
+    // printf("passei");
     ImprimeListaTerm(listaTerm);
+
+    ImprimeListaRot(listaRot);
 
     
 
