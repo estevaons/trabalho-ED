@@ -150,6 +150,18 @@ void DesconectaTerminal(Celula_T* cel){
 }
 
 
+void ImprimeListaTermDOT(ListaTerm* listaT, FILE* dot){
+    Celula_T* p;
+
+    fprintf(dot,"strict graph { ");
+
+    for(p=listaT->prim;p != NULL;p = p->prox){
+        ImprimeTerminalDOT(p->term,dot);
+    }
+}
+
+
+
 void ImprimeListaTerm(ListaTerm* listaT){
     Celula_T* p;
     for(p=listaT->prim;p != NULL;p = p->prox){

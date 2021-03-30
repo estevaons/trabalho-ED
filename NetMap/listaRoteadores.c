@@ -131,11 +131,11 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
         adicionaUltEnlaces(nova2,listaEnlaces1); //listaEnlaces1->ult = nova2; 
     }
 
-    printf("Lista de enlaces do roteador %s:\n",retornaNomeRot(rot1));
-    ImprimeListaEnlaces(listaEnlaces1);
-    printf("\nLista de enlaces do roteador %s:\n",retornaNomeRot(rot2));
-    ImprimeListaEnlaces(listaEnlaces2);
-    printf("-------------------\n");
+    // printf("Lista de enlaces do roteador %s:\n",retornaNomeRot(rot1));
+    // ImprimeListaEnlaces(listaEnlaces1);
+    // printf("\nLista de enlaces do roteador %s:\n",retornaNomeRot(rot2));
+    // ImprimeListaEnlaces(listaEnlaces2);
+    // printf("-------------------\n");
 }
 
 size_t retornaSizeOfCelR(){
@@ -271,6 +271,18 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida){ // Impr
     fprintf(saida,"FREQUENCIAOPERADORA %s: %d\n",operadora,cont);
 
 }
+
+
+
+void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot){ // Printa a lista de roteadores 
+    Celula_R* p;
+    for(p=listaR->prim;p != NULL;p = p->prox){
+        ImprimeListaEnlacesDOT(retornaEnlaces(p->rot),dot,p->rot);
+    }
+    fprintf(dot,"}");
+}
+
+
 
 void ImprimeListaRot(ListaRot* listaR){ // Printa a lista de roteadores 
     Celula_R* p;

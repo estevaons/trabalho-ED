@@ -62,4 +62,8 @@ void adicionaPrimEnlaces(Celula_E* cel,Enlaces* lista);
 
 void adicionaUltEnlaces(Celula_E* cel,Enlaces* lista);
 
+void ImprimeRoteadorDOT(Roteador* rot,FILE* dot);
+
+void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot);
+
 #endif

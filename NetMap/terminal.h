@@ -30,4 +30,6 @@ void ImprimeTerminal(Terminal* term); // imprime um terminal
 
 void LiberaTerminal(Terminal* term); // libera um terminal
 
+void ImprimeTerminalDOT(Terminal* term, FILE* dot);
+
 #endif

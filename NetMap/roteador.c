@@ -75,7 +75,12 @@ void adicionaUltEnlaces(Celula_E* cel,Enlaces* lista){
 
 
 
-
+void ImprimeRoteadorDOT(Roteador* rot,FILE* dot){
+        
+    printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);
+    
+    
+}
 
 
 
@@ -214,6 +219,18 @@ void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){
 
 }
 
+
+
+void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot){ // Printa a lista de enlaces *******ANALISAR DNV temos que imprimir de tras pra frente
+    Celula_E* p;
+    for(p=lista->prim;p != NULL;p = p->prox){
+        if(p->prox == NULL){
+            fprintf(dot,"%s -- %s; ",rot->nome,p->rot->nome);
+            break;
+        }
+        fprintf(dot,"%s -- %s; ",rot->nome,p->rot->nome);
+    }
+}
 
 
 void ImprimeListaEnlaces(Enlaces* lista){ // Printa a lista de enlaces *******ANALISAR DNV temos que imprimir de tras pra frente

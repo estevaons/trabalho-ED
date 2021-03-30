@@ -53,6 +53,27 @@ char* retornaLocTerm(Terminal* term){
     return term->loc;
 }
 
+void ImprimeTerminalDOT(Terminal* term, FILE* dot){
+
+    char* nome;
+    Roteador* rot;
+
+   
+
+    if(term->rot != NULL){
+
+        rot = retornaRot(term->rot);
+        nome = retornaNomeRot(rot);
+
+        fprintf(dot,"%s -- %s; ",term->nome,nome);
+
+        
+    }
+    else{
+        fprintf(dot,"%s; ",term->nome);
+    }
+
+}
 
 
 

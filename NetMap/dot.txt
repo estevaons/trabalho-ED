@@ -1,0 +1,2 @@
+strict graph { Ter1 -- Rot1; Ter2 -- Rot2; Ter3 -- Rot2; Ter4; Ter5; Ter6 -- Rot4; Ter7 -- Rot4; Rot1 -- Rot3; Rot2 -- Rot3; Rot2 -- Rot5; Rot3 -- Rot1; Rot3 -- Rot2; Rot3 -- Rot4; Rot3 -- Rot5; Rot4 -- Rot3; Rot5 -- Rot3; Rot5 -- Rot2; }
+strict graph { Ter1 -- Rot1; Ter2 -- Rot2; Ter3 -- Rot2; Ter4 -- Rot2; Ter5 -- Rot5; Ter6 -- Rot4; Ter7 -- Rot4; Rot1 -- Rot3; Rot2 -- Rot3; Rot3 -- Rot1; Rot3 -- Rot2; Rot3 -- Rot4; Rot3 -- Rot5; Rot4 -- Rot3; Rot5 -- Rot3; }

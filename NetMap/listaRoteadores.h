@@ -38,5 +38,7 @@ int verificaRoteador(Celula_R* cel,ListaRot* lista); // verifica se o roteador e
 
 void LiberaListaRot(ListaRot* listaR);// Destroi a lista de roteadores
 
+void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot);
+
 
 #endif

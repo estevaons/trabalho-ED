@@ -7,7 +7,7 @@
 #include "listaRoteadores.h"
 
 
-void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM,FILE* log, int* idRot,int* idTerm,FILE* saida){
+void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM,FILE* log, int* idRot,int* idTerm,FILE* saida, FILE* dot){
     char instrucao[100];
     char nomeRot[100],nomeRot1[100],nomeRot2[100];
     char nomeOperadora[100];
@@ -104,6 +104,9 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     if(strcmp(instrucao,"IMPRIMENETMAP")==0){
 
         // executar imprime netmap
+        ImprimeListaTermDOT(listaTERM,dot);
+        ImprimeListaRotDOT(listaROT,dot);
+        fprintf(dot,"\n");
     }
 
     if(strcmp(instrucao,"DESCONECTAROTEADORES")==0){
@@ -179,6 +182,7 @@ int main(){
     FILE* entrada;
     FILE* log;
     FILE* saida;
+    FILE* dot;
     int idRot = 0; 
     int idTerm = 0;
 
@@ -186,6 +190,7 @@ int main(){
  
     log = fopen("log.txt","w");
     saida = fopen("saida.txt","w");
+    dot = fopen("dot.txt","w");
     entrada = fopen("entrada.txt","r");
 
     if(entrada==NULL){
@@ -200,15 +205,15 @@ int main(){
 
     while(!feof(entrada)){
 
-        le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida);     
+        le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida,dot);     
 
 
     }
     
-    //printf("frequencia operadora/terminal funcionando\n");
-    ImprimeListaTerm(listaTerm);
+    printf("IMPRIME NETMAP FUNCIONANDO\n");
+    //ImprimeListaTerm(listaTerm);
 
-    ImprimeListaRot(listaRot);
+    //ImprimeListaRot(listaRot);
 
     
 
