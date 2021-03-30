@@ -37,14 +37,14 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
     
     }
     if(strcmp(instrucao,"REMOVEROTEADOR")==0){ // OK!
-        /*fscanf(entrada,"%s",nomeRot); 
+        fscanf(entrada,"%s",nomeRot); 
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
 
         if (celR !=NULL){
             RemoveRoteador(celR,listaROT);    // executar remove roteador      
         }
-        */
+        
         
     }
 
@@ -205,10 +205,10 @@ int main(){
 
     }
     
-    printf("frequencia operadora/terminal funcionando\n");
-    //ImprimeListaTerm(listaTerm);
+    //printf("frequencia operadora/terminal funcionando\n");
+    ImprimeListaTerm(listaTerm);
 
-    //ImprimeListaRot(listaRot);
+    ImprimeListaRot(listaRot);
 
     
 

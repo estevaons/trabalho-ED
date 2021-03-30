@@ -93,10 +93,6 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
     adicionaRotCelE(nova2,rot2);
 
 
-
-    //ImprimeRoteador(retornaRotEnlaces(nova1));
-    //ImprimeRoteador(retornaRotEnlaces(nova2));
-
     adicionaProxCelE(nova1,NULL); // nova1->prox = NULL; 
     
     Celula_E* prim1 = retornaPrimEnlaces(listaEnlaces1);
@@ -135,11 +131,11 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
         adicionaUltEnlaces(nova2,listaEnlaces1); //listaEnlaces1->ult = nova2; 
     }
 
-
+    printf("Lista de enlaces do roteador %s:\n",retornaNomeRot(rot1));
     ImprimeListaEnlaces(listaEnlaces1);
-    printf("-------------------\n");
+    printf("\nLista de enlaces do roteador %s:\n",retornaNomeRot(rot2));
     ImprimeListaEnlaces(listaEnlaces2);
-    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
+    printf("-------------------\n");
 }
 
 size_t retornaSizeOfCelR(){
