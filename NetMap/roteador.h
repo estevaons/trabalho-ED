@@ -36,7 +36,7 @@ size_t tamanhoCelE(); // retorna o tamanho da celula E
 
 void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista); // remove um roteador de uma lista de enlaces de outro roteador
 
-Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista); // busca um roteador na lista de enlaces de outro roteador
+Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log, Roteador* rot2); // busca um roteador na lista de enlaces de outro roteador
 
 void ImprimeListaEnlaces(Enlaces* lista); // imprime a lista de enlaces de um roteador
 
@@ -56,6 +56,10 @@ void ImprimeRoteador(Roteador* rot);// imprime o roteador
 
 void LiberaRoteador(Roteador* rot);// libera o roteador
 
+void adicionaProxCelE(Celula_E* cel1, Celula_E* cel2);
 
+void adicionaPrimEnlaces(Celula_E* cel,Enlaces* lista);
+
+void adicionaUltEnlaces(Celula_E* cel,Enlaces* lista);
 
 #endif

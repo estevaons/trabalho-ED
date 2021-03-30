@@ -45,6 +45,26 @@ char* retornaOperadoraRot(Roteador* rot){
 }
 
 
+void adicionaProxCelE(Celula_E* cel1, Celula_E* cel2){
+    cel1->prox = cel2;
+}
+
+void adicionaPrimEnlaces(Celula_E* cel,Enlaces* lista){
+    lista->prim = cel;
+}
+
+void adicionaUltEnlaces(Celula_E* cel,Enlaces* lista){
+    lista->ult = cel;
+}
+
+
+
+
+
+
+
+
+
 void ImprimeRoteador(Roteador* rot){
         
     printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);
@@ -94,7 +114,7 @@ Celula_E* retornaProxEnlaces(Celula_E* cel){
     return cel->prox;
 }
 
-Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista){
+Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador* rot2){
     int idRot = retornaIdRot(rot);
 
     Celula_E* p;
