@@ -136,10 +136,10 @@ void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2){
     }
 
 
-    // ImprimeListaEnlaces(listaEnlacesROTEADOR1);
-    // printf("-------------------\n");
-    // ImprimeListaEnlaces(listaEnlacesROTEADOR2);
-    // printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
+    ImprimeListaEnlaces(listaEnlaces1);
+    printf("-------------------\n");
+    ImprimeListaEnlaces(listaEnlaces2);
+    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
 }
 
 size_t retornaSizeOfCelR(){
@@ -160,9 +160,7 @@ void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
 
     Celula_E* cel_E_Rot1 = buscaRoteadorEnlaces(rot1,listaEnlaces2,log,rot2);
 
-    // Celula_E* cel_E_lista1 = buscaRoteadorEnlaces(rot2,listaEnlaces1);
-    
-    // Celula_E* cel_E_lista2 = buscaRoteadorEnlaces(rot1,listaEnlaces2);
+
 
     if(cel_E_Rot1 != NULL && cel_E_Rot2 != NULL){
         RemoveRoteadorEnlaces(cel_E_Rot2,listaEnlaces1); // remover uma celula_E de uma lista de enlaces de um roteador
@@ -170,8 +168,7 @@ void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
     } 
 
 
-    // RemoveRoteadorEnlaces(cel_E_lista1,listaEnlaces2); // remover uma celula_E de uma lista de enlaces de um roteador
-    // RemoveRoteadorEnlaces(cel_E_lista2,listaEnlaces1); 
+
     
 }
 

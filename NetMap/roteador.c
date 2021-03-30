@@ -5,6 +5,21 @@
 
 #include "roteador.h"
 
+
+struct celula_e{
+    Celula_E* prox;
+    Roteador* rot;
+};
+
+struct enlaces{
+    Celula_E* prim;
+    Celula_E* ult;
+    int *tamanho;
+};
+
+
+
+
 struct roteador{
     int id;
     char* nome;
@@ -82,16 +97,7 @@ void LiberaRoteador(Roteador* rot){
 // -------------------------------------------------------------------------
 
 
-struct celula_e{
-    Celula_E* prox;
-    Roteador* rot;
-};
 
-struct enlaces{
-    Celula_E* prim;
-    Celula_E* ult;
-    int *tamanho;
-};
 
 
 void adicionaRotCelE(Celula_E* cel, Roteador* roteador){
