@@ -17,9 +17,6 @@ struct enlaces{
     int *tamanho;
 };
 
-
-
-
 struct roteador{
     int id;
     char* nome;
@@ -27,13 +24,16 @@ struct roteador{
     Enlaces* listaEnlaces;
 };
 
+
+
 Enlaces* retornaEnlaces(Roteador* rot){
     return rot->listaEnlaces;
 
 }
 
-
-
+void setarListaEnlaces(Enlaces* lista1,Enlaces* lista2){
+    lista1 = lista2;
+}
 
 Roteador* CriaRoteador(int id,char* nome,char* operadora){
     Roteador* rot = (Roteador*)malloc(sizeof(Roteador));
@@ -73,23 +73,13 @@ void adicionaUltEnlaces(Celula_E* cel,Enlaces* lista){
 }
 
 
-
-
-void ImprimeRoteadorDOT(Roteador* rot,FILE* dot){
-        
-    printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);
-    
-    
+void ImprimeRoteadorDOT(Roteador* rot,FILE* dot){    
+   printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);  
 }
 
 
-
-
-void ImprimeRoteador(Roteador* rot){
-        
+void ImprimeRoteador(Roteador* rot){    
     printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);
-    
-    
 }
 
 void LiberaRoteador(Roteador* rot){
@@ -97,13 +87,6 @@ void LiberaRoteador(Roteador* rot){
     free(rot->operadora);
     free(rot);
 }
-
-
-// -------------------------------------------------------------------------
-
-
-
-
 
 void adicionaRotCelE(Celula_E* cel, Roteador* roteador){
     cel->rot = roteador;
@@ -123,6 +106,19 @@ int* retornaTamanhoEnlaces(Enlaces* enlaces){
 
 Celula_E* retornaProxEnlaces(Celula_E* cel){
     return cel->prox;
+}
+
+Celula_E* verificaListaEnlaces(Roteador* rot,Enlaces* lista){
+    Celula_E* p;  
+
+    for(p=lista->prim;p!=NULL;p=p->prox){
+        if(p->rot->id==rot->id){
+            return p;
+        }
+    }
+
+    return NULL;
+
 }
 
 Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador* rot2){
@@ -193,13 +189,14 @@ void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){
     Celula_E* p = lista->prim;
     Celula_E* ant = NULL;
 
-    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(retornaRotEnlaces(cel))){
+    while(p!=NULL && retornaIdRot(p->rot)!=retornaIdRot(cel->rot)){
         ant = p;
         p = p->prox;
     }
 
     if(p == lista->prim && p == lista->ult){ // unica celula
-        lista->prim = lista->ult = NULL;
+        lista->prim = NULL;
+        lista->ult = NULL;
     }
 
     else if(p == lista->prim){ // se for a primeira celula

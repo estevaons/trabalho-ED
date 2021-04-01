@@ -34,6 +34,10 @@ Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel); // cadast
 
 size_t tamanhoCelE(); // retorna o tamanho da celula E
 
+void setarListaEnlaces(Enlaces* lista1,Enlaces* lista2);
+
+Celula_E* verificaListaEnlaces(Roteador* rot,Enlaces* lista);
+
 void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista); // remove um roteador de uma lista de enlaces de outro roteador
 
 Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log, Roteador* rot2); // busca um roteador na lista de enlaces de outro roteador

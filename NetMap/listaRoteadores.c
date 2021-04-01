@@ -192,66 +192,64 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
     }
 }
 void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
-    // Celula_R* p = listaR->prim;
-    // Celula_R* ant = NULL;
-    // int existeEnlaces = 0;
+    Celula_R* p = listaR->prim;
+    Celula_R* ant = NULL;
+    int existeEnlaces = 0;
 
-    // int idP = retornaIdRot(p->rot);
+    int idP = retornaIdRot(p->rot);
 
-    
-    // Roteador* rotCel = retornaRot(cel); 
-    // int idCel = retornaIdRot(rotCel);
-    // Enlaces* enlacesCelR = retornaEnlaces(rotCel);
+    Roteador* rotCel = retornaRot(cel); 
+    int idCel = retornaIdRot(rotCel);
+    Enlaces* enlacesCelR = retornaEnlaces(rotCel);
 
-    // while(p->prox!=NULL && idP != idCel){
-    //     ant = p;
-    //     p = p->prox;
-    //     idP = retornaIdRot(p->rot);
-    // } 
+    while(p->prox!=NULL && idP != idCel){
+        ant = p;
+        p = p->prox;
+        idP = retornaIdRot(p->rot);
+    } 
 
 
-    // if(p == listaR->prim && p == listaR->ult){ // unica celula
-    //     listaR->prim = listaR->ult = NULL;
-    // }
+    if(p == listaR->prim && p == listaR->ult){ // unica celula
+        listaR->prim = NULL;
+        listaR->ult = NULL;
+    }
 
-    // else if(p == listaR->prim){ // se for a primeira celula
-    //     listaR->prim = p->prox;
-    // }
+    else if(p == listaR->prim){ // se for a primeira celula
+        listaR->prim = p->prox;
+    }
 
-    // else if(p == listaR->ult){ // se for a ultima celula    
-    //     listaR->ult = ant;
-    //     listaR->ult->prox = NULL;
-    // } 
+    else if(p == listaR->ult){ // se for a ultima celula    
+        listaR->ult = ant;
+        listaR->ult->prox = NULL;
+    } 
 
-    // else if(p != listaR->prim && p != listaR->ult){ // caso comum
-    //     ant->prox = p->prox;            
-    // } 
+    else if(p != listaR->prim && p != listaR->ult){ // caso comum
+        ant->prox = p->prox;            
+    } 
 
-    // Celula_R* andaListaRot;
-    
+    // removendo o roteador removido da lista principal dos enlaces dos outros roteadores
 
-    // for(andaListaRot=listaR->prim;andaListaRot!=NULL;andaListaRot=andaListaRot->prox){ // ANDA NA LISTA DE ROTEADORES
-    //     Roteador* rot1 = retornaRot(andaListaRot); // PEGA O ROTEADOR DA CELULA R ANALISADA
-    //     Enlaces* listaEnlaces = retornaEnlaces(rot1); // PEGA A LISTA DE ENLACES DO ROTEADOR ANALISADO
+    Celula_R* andaListaRot;
+    for(andaListaRot=listaR->prim;andaListaRot!=NULL;andaListaRot=andaListaRot->prox){ // ANDA NA LISTA DE ROTEADORES
+        Roteador* rot1 = retornaRot(andaListaRot); // PEGA O ROTEADOR DA CELULA R ANALISADA
+        Enlaces* listaEnlaces = retornaEnlaces(rot1);
 
-    //     Celula_E* celE = buscaRoteadorEnlaces(rotCel,listaEnlaces); // BUSCA O ROTEADOR REMOVIDO NA LISTA DE ENLACES DO ROTEADOR ANALISADO
+        Celula_E* celE = verificaListaEnlaces(rotCel,listaEnlaces); // BUSCA O ROTEADOR REMOVIDO NA LISTA DE ENLACES DO ROTEADOR ANALISADO
 
-    //     //printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
-    //     //ImprimeListaEnlaces(listaEnlaces);
-    //     //printf("-------------------------------------------------------------------\n");
+        /*printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
+        ImprimeListaEnlaces(listaEnlaces);
+        printf("-------------------------------------------------------------------\n"); */
         
-    //     if(celE!=NULL){ // SE O ROTEADOR FOR ENCONTRADO NA LISTA DE ENLACES
-    //         RemoveRoteadorEnlaces(celE,listaEnlaces); // REMOVE A CELULA E DA LISTA DE ENLACES DO ROTEADOR ANALISADO
-    //     } 
+        if(celE!=NULL){ // SE O ROTEADOR FOR ENCONTRADO NA LISTA DE ENLACES
+            RemoveRoteadorEnlaces(celE,listaEnlaces); // REMOVE A CELULA E DA LISTA DE ENLACES DO ROTEADOR ANALISADO
+        } 
 
-    //     //printf("LISTA ENLACES DEPOIS DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
-    //     //ImprimeListaEnlaces(listaEnlaces);
-    //      //printf("-------------------------------------------------------------------\n");
-    // }
+        /*printf("LISTA ENLACES DEPOIS DO ROT %s:\n",retornaNomeRot(rot1)); // TESTE
+        ImprimeListaEnlaces(listaEnlaces);
+        printf("-------------------------------------------------------------------\n"); */
+    }
 
-    // LiberaListaEnlaces(enlacesCelR);
-
-    // free(p);
+    free(p);
 
 }
 

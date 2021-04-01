@@ -36,7 +36,8 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         *idRot = *idRot+1;
     
     }
-    if(strcmp(instrucao,"REMOVEROTEADOR")==0){ // OK!
+
+    if(strcmp(instrucao,"REMOVEROTEADOR")==0){ 
         fscanf(entrada,"%s",nomeRot); 
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
@@ -44,8 +45,6 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         if (celR !=NULL){
             RemoveRoteador(celR,listaROT);    // executar remove roteador      
         }
-        
-        
     }
 
     if(strcmp(instrucao,"CADASTRATERMINAL")==0){ // OK!
@@ -57,7 +56,8 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         *idTerm = *idTerm +1;
 
     }
-    if(strcmp(instrucao,"REMOVETERMINAL")==0){
+
+    if(strcmp(instrucao,"REMOVETERMINAL")==0){ // OK !
         fscanf(entrada,"%s",nomeTerm);
 
         // executar remove terminal
@@ -79,19 +79,13 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         if(cel1 != NULL && cel2 != NULL){
             ConectaRoteadoresEnlaces(cel1,cel2);
         }
-
-
-    
     }
 
-    if(strcmp(instrucao,"CONECTATERMINAL")==0){
+    if(strcmp(instrucao,"CONECTATERMINAL")==0){ // OK!
         fscanf(entrada,"%s",nomeTerm1);
         fscanf(entrada,"%s",nomeRot);
         
         // executar conecta terminal
-        // PRITAR ROT CONECTADO AO TERMINAL!!!
-
-
         Celula_T* celT = buscaCelTerminal(nomeTerm1,listaTERM,log);
 
         Celula_R* celR = buscaCelRot(nomeRot,listaROT,log);
@@ -101,7 +95,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         }
     }
 
-    if(strcmp(instrucao,"IMPRIMENETMAP")==0){
+    if(strcmp(instrucao,"IMPRIMENETMAP")==0){ // OK!
 
         // executar imprime netmap
         ImprimeListaTermDOT(listaTERM,dot);
@@ -109,7 +103,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fprintf(dot,"\n");
     }
 
-    if(strcmp(instrucao,"DESCONECTAROTEADORES")==0){
+    if(strcmp(instrucao,"DESCONECTAROTEADORES")==0){ // OK!
         fscanf(entrada,"%s",nomeRot1);
         fscanf(entrada,"%s",nomeRot2);
 
@@ -129,7 +123,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
        
     }
 
-    if(strcmp(instrucao,"DESCONECTATERMINAL")==0){
+    if(strcmp(instrucao,"DESCONECTATERMINAL")==0){ // OK !
         fscanf(entrada,"%s",nomeTerm);
 
         // executar desconecta terminal
@@ -138,7 +132,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
 
     }
     
-    if(strcmp(instrucao,"FREQUENCIAOPERADORA")==0){
+    if(strcmp(instrucao,"FREQUENCIAOPERADORA")==0){ // OK!
         fscanf(entrada,"%s",nomeOperadora);
 
         // executar frequencia operadora
@@ -146,7 +140,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         FrequenciaOperadora(listaROT,nomeOperadora,saida);
     }
 
-    if(strcmp(instrucao,"FREQUENCIATERMINAL")==0){
+    if(strcmp(instrucao,"FREQUENCIATERMINAL")==0){ // OK!
         fscanf(entrada,"%s",nomeLoc);
 
         // executar frequencia terminal
@@ -210,7 +204,6 @@ int main(){
 
     }
     
-    printf("IMPRIME NETMAP FUNCIONANDO\n");
     //ImprimeListaTerm(listaTerm);
 
     //ImprimeListaRot(listaRot);
