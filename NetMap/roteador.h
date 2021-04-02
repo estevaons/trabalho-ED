@@ -70,7 +70,7 @@ void ImprimeRoteadorDOT(Roteador* rot,FILE* dot);
 
 void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot);
 
-int EnviaPacotesDados(Roteador* rot1, Roteador* rot2,FILE*saida);
+void EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida, char* nomeTerm1, char* nomeTerm2);
 
 int analisaListaEnlaces(Roteador* rot, Enlaces* lista);
 

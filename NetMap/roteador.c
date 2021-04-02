@@ -287,14 +287,18 @@ int verificaConexaoEnlaces(Roteador* rot1,Roteador* rot2,int* vetID,int* cont){
 
     else{
         Celula_E* p;
+       
         for(p=retornaPrimEnlaces(enlacesAnalisado);p!=NULL;p=p->prox){ // andando na lista de enlaces do roteador anterior
-
             Roteador* rotP = p->rot; //pega o roteador 
 
             if(verificaVetorID(rotP->id,vetID,cont)==0){ // verifica se o roteador ja foi analisado
-                vetID = (int* )realloc(vetID, *cont * sizeof(int));
-                vetID[*cont] = rot1->id; // grava o id do roteador 1
-                *cont = *cont+1;    
+                *cont = *cont+1;
+
+                vetID = (int*)realloc(vetID, (*cont) * sizeof(int));
+                
+                vetID[*cont-1] = rot1->id; // grava o id do roteador 1
+                
+                   
 
                 if(verificaConexaoEnlaces(rotP,rot2,vetID,cont)){ // recursão
                     return 1;
@@ -305,24 +309,22 @@ int verificaConexaoEnlaces(Roteador* rot1,Roteador* rot2,int* vetID,int* cont){
         return 0;
     }
 }
-int EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida){
+void EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida, char* nomeTerm1, char* nomeTerm2){
     int tam = 2;
     int* cont= &tam;
     
-    int* vetID =(int*)malloc(tam*sizeof(int));
-   
-    vetID[*cont] = rot1->id; 
-    *cont = *cont+ 1;
+    int* vetID =(int*)calloc(tam,sizeof(int));
+
     int idProcurado = rot2->id;
 
 
  
     if(verificaConexaoEnlaces(rot1,rot2,vetID,cont)){
-        printf("sim\n");
+        fprintf(saida,"ENVIARPACOTESDADOS %s %s: SIM\n",nomeTerm1,nomeTerm2);
     }else{
-        printf("não\n");
+        fprintf(saida,"ENVIARPACOTESDADOS %s %s: NAO\n",nomeTerm1,nomeTerm2);
     }  
 
-    
+    free(vetID);
 
 } 

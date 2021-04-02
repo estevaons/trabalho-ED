@@ -156,25 +156,23 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm1);
         fscanf(entrada,"%s",nomeTerm2);
 
-        buscaCelTerminal(nomeTerm1,listaTERM,log);
-        buscaCelTerminal(nomeTerm2,listaTERM,log);
+        Celula_T* celT1 = buscaCelTerminal(nomeTerm1,listaTERM,log);
+        Celula_T* celT2 = buscaCelTerminal(nomeTerm2,listaTERM,log);
 
         Celula_R* celR_rot1;
         Celula_R* celR_rot2;
-        
-        celR_rot1 = retornaCelRTerm(retornaTerm(buscaCelTerminal(nomeTerm1,listaTERM,log)));
-        celR_rot2 = retornaCelRTerm(retornaTerm(buscaCelTerminal(nomeTerm2,listaTERM,log)));
-        
 
-        // executar enviar pacotes dados
+        if(celT1 != NULL && celT2 != NULL){
+            Terminal* t1 = retornaTerm(celT1);
+            Terminal* t2 = retornaTerm(celT2);
 
-        if(celR_rot1 == NULL || celR_rot2 == NULL){
-            printf("nao\n");
-        }else{
-            EnviaPacotesDados(retornaRot(celR_rot1),retornaRot(celR_rot2),saida);
-        }
+            celR_rot1 = retornaCelRTerm(t1);
+            celR_rot2 = retornaCelRTerm(t2);
+
+            // executar enviar pacotes dados
+            EnviaPacotesDados(retornaRot(celR_rot1),retornaRot(celR_rot2),saida,nomeTerm1,nomeTerm2);
+        }   
     }
-
 
 
     if(strcmp(instrucao,"FIM")==0){
@@ -191,8 +189,8 @@ int main(){
     FILE* log;
     FILE* saida;
     FILE* dot;
-    int idRot = 0; 
-    int idTerm = 0;
+    int idRot = 1; 
+    int idTerm = 1;
 
     //abrindo arquivo
  

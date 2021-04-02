@@ -227,6 +227,10 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
         ant->prox = p->prox;            
     } 
 
+    /*printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rotCel)); // TESTE
+    ImprimeListaEnlaces(enlacesCelR);
+    printf("-------------------------------------------------------------------\n");  */
+
     // removendo o roteador removido da lista principal dos enlaces dos outros roteadores
 
     Celula_R* andaListaRot;
@@ -249,7 +253,17 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
         printf("-------------------------------------------------------------------\n"); */
     }
 
-    free(p);
+    LiberaListaEnlaces(enlacesCelR);
+
+    /*printf("LISTA ENLACES DEPOIS DO ROT %s:\n",retornaNomeRot(rotCel)); // TESTE
+    ImprimeListaEnlaces(enlacesCelR);
+    printf("-------------------------------------------------------------------\n"); */
+
+    // apontando os terminais que estao conectados ao roteador removido para NULL
+
+    
+
+    //free(p);
 
 }
 
