@@ -103,28 +103,7 @@ void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
     free(p);
 }
 
-void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida){
-    Terminal* t1 = retornaTerm(CelTerm1);
-    Terminal* t2 = retornaTerm(CelTerm2);
 
-
-    Celula_R* celR1 = retornaCelRTerm(t1);
-    Celula_R* celR2 = retornaCelRTerm(t2);
-    char* resposta;
-
-    char* nomeTerm1 = retornaNomeTerm(CelTerm1->term);
-    char* nomeTerm2 = retornaNomeTerm(CelTerm2->term);
-
-
-    if(retornaEnlaces(retornaRot(celR1)) == NULL || retornaEnlaces(retornaRot(celR2)) == NULL){
-        resposta = strdup("NAO");
-        fprintf(saida,"ENVIARPACOTESDADOS %s %s: NAO\n",nomeTerm1,nomeTerm2);
-    }else{
-        resposta = strdup("SIM");
-        fprintf(saida,"ENVIARPACOTESDADOS %s %s: SIM\n",nomeTerm1,nomeTerm2);
-    }
-
-}
 
 
 void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){

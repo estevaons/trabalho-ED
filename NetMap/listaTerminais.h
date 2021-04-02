@@ -23,7 +23,7 @@ void ConectaTerminal(Celula_T* term,Celula_R* rot); //  conecta um terminal a um
 
 void ImprimeListaTerm(ListaTerm* listaT); // Imprime a lista de terminais
 
-void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida); // verifica se é possivel enviar dados do term1 para o term2
+ // verifica se é possivel enviar dados do term1 para o term2
 
 Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log); // busca uma celula do tipo T pelo nome do seu terminal na lista de terminais
 

@@ -70,4 +70,10 @@ void ImprimeRoteadorDOT(Roteador* rot,FILE* dot);
 
 void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot);
 
+int EnviaPacotesDados(Roteador* rot1, Roteador* rot2,FILE*saida);
+
+int analisaListaEnlaces(Roteador* rot, Enlaces* lista);
+
+int verificaVetorID(int id,int* vet, int* tam);
+
 #endif

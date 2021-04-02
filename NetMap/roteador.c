@@ -108,6 +108,19 @@ Celula_E* retornaProxEnlaces(Celula_E* cel){
     return cel->prox;
 }
 
+int analisaListaEnlaces(Roteador* rot, Enlaces* lista){
+     Celula_E* p;  
+
+    for(p=lista->prim;p!=NULL;p=p->prox){
+        if(p->rot->id==rot->id){
+            return 1;
+        }
+    }
+
+    return 0;
+
+}
+
 Celula_E* verificaListaEnlaces(Roteador* rot,Enlaces* lista){
     Celula_E* p;  
 
@@ -255,3 +268,61 @@ void LiberaListaEnlaces(Enlaces* lista){ // Destroi a lista de roteadores
     free(lista);
 }
 
+int verificaVetorID(int id,int* vet, int *tam){
+    for(int i=0;i<*tam;i++){
+        if(vet[i] == id){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int verificaConexaoEnlaces(Roteador* rot1,Roteador* rot2,int* vetID,int* cont){
+    // entra lista de enlaces do roteador 1
+    Enlaces* enlacesAnalisado = rot1 -> listaEnlaces; // Pega a lista de enlaces do roteador 1
+    
+    if(analisaListaEnlaces(rot2,enlacesAnalisado)){ // verifica se o roteador 5 esta nos enlaces do roteador 1
+        return 1;
+    }
+
+    else{
+        Celula_E* p;
+        for(p=retornaPrimEnlaces(enlacesAnalisado);p!=NULL;p=p->prox){ // andando na lista de enlaces do roteador anterior
+
+            Roteador* rotP = p->rot; //pega o roteador 
+
+            if(verificaVetorID(rotP->id,vetID,cont)==0){ // verifica se o roteador ja foi analisado
+                vetID = (int* )realloc(vetID, *cont * sizeof(int));
+                vetID[*cont] = rot1->id; // grava o id do roteador 1
+                *cont = *cont+1;    
+
+                if(verificaConexaoEnlaces(rotP,rot2,vetID,cont)){ // recursão
+                    return 1;
+                }
+
+            }
+        }
+        return 0;
+    }
+}
+int EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida){
+    int tam = 2;
+    int* cont= &tam;
+    
+    int* vetID =(int*)malloc(tam*sizeof(int));
+   
+    vetID[*cont] = rot1->id; 
+    *cont = *cont+ 1;
+    int idProcurado = rot2->id;
+
+
+ 
+    if(verificaConexaoEnlaces(rot1,rot2,vetID,cont)){
+        printf("sim\n");
+    }else{
+        printf("não\n");
+    }  
+
+    
+
+} 

@@ -159,9 +159,20 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         buscaCelTerminal(nomeTerm1,listaTERM,log);
         buscaCelTerminal(nomeTerm2,listaTERM,log);
 
+        Celula_R* celR_rot1;
+        Celula_R* celR_rot2;
+        
+        celR_rot1 = retornaCelRTerm(retornaTerm(buscaCelTerminal(nomeTerm1,listaTERM,log)));
+        celR_rot2 = retornaCelRTerm(retornaTerm(buscaCelTerminal(nomeTerm2,listaTERM,log)));
+        
+
         // executar enviar pacotes dados
 
-        //EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida,log);
+        if(celR_rot1 == NULL || celR_rot2 == NULL){
+            printf("nao\n");
+        }else{
+            EnviaPacotesDados(retornaRot(celR_rot1),retornaRot(celR_rot2),saida);
+        }
     }
 
 
@@ -207,11 +218,7 @@ int main(){
 
     }
     
-    printf("testando as coisas com o meld");
-
-    //ImprimeListaTerm(listaTerm);
-
-    //ImprimeListaRot(listaRot);
+    //printf("testando as coisas com o meld");
 
     
 
