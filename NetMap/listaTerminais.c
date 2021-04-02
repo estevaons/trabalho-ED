@@ -107,6 +107,7 @@ void EnviaPacotesDados(Celula_T* CelTerm1, Celula_T* CelTerm2,FILE*saida){
     Terminal* t1 = retornaTerm(CelTerm1);
     Terminal* t2 = retornaTerm(CelTerm2);
 
+
     Celula_R* celR1 = retornaCelRTerm(t1);
     Celula_R* celR2 = retornaCelRTerm(t2);
     char* resposta;
@@ -153,7 +154,7 @@ void DesconectaTerminal(Celula_T* cel){
 void ImprimeListaTermDOT(ListaTerm* listaT, FILE* dot){
     Celula_T* p;
 
-    fprintf(dot,"strict graph { ");
+    fprintf(dot,"strict graph {\n");
 
     for(p=listaT->prim;p != NULL;p = p->prox){
         ImprimeTerminalDOT(p->term,dot);

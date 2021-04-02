@@ -65,12 +65,12 @@ void ImprimeTerminalDOT(Terminal* term, FILE* dot){
         rot = retornaRot(term->rot);
         nome = retornaNomeRot(rot);
 
-        fprintf(dot,"%s -- %s; ",term->nome,nome);
+        fprintf(dot,"    %s -- %s;\n",term->nome,nome);
 
         
     }
     else{
-        fprintf(dot,"%s; ",term->nome);
+        fprintf(dot,"    %s;\n",term->nome);
     }
 
 }

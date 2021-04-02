@@ -100,7 +100,7 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         // executar imprime netmap
         ImprimeListaTermDOT(listaTERM,dot);
         ImprimeListaRotDOT(listaROT,dot);
-        fprintf(dot,"\n");
+        //fprintf(dot,"\n");
     }
 
     if(strcmp(instrucao,"DESCONECTAROTEADORES")==0){ // OK!
@@ -156,9 +156,12 @@ void le_e_executaComando(FILE* entrada, ListaRot* listaROT, ListaTerm* listaTERM
         fscanf(entrada,"%s",nomeTerm1);
         fscanf(entrada,"%s",nomeTerm2);
 
+        buscaCelTerminal(nomeTerm1,listaTERM,log);
+        buscaCelTerminal(nomeTerm2,listaTERM,log);
+
         // executar enviar pacotes dados
 
-        //EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida);
+        //EnviaPacotesDados(buscaCelTerminal(nomeTerm1,listaTERM,log),buscaCelTerminal(nomeTerm2,listaTERM,log),saida,log);
     }
 
 
@@ -204,6 +207,8 @@ int main(){
 
     }
     
+    printf("testando as coisas com o meld");
+
     //ImprimeListaTerm(listaTerm);
 
     //ImprimeListaRot(listaRot);

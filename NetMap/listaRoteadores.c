@@ -258,7 +258,7 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida){ // Impr
     Celula_R* p = listaR->prim;
 
     while(p!=NULL){
-        if(strcmp(retornaOperadoraRot(p->rot),operadora)){
+        if(strcmp(retornaOperadoraRot(p->rot),operadora)==0){
             cont++;
         }
         p = p->prox;
@@ -277,7 +277,7 @@ void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot){ // Printa a lista de rotead
     for(p=listaR->prim;p != NULL;p = p->prox){
         ImprimeListaEnlacesDOT(retornaEnlaces(p->rot),dot,p->rot);
     }
-    fprintf(dot,"}");
+    fprintf(dot,"}\n");
 }
 
 

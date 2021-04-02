@@ -1,3 +1,0 @@
-ERRO: Terminal Ter9 inexistente no NetMap!
-ERRO: Roteador Rot5 inexistente no NetMap!
-ERRO: Roteador Rot5 inexistente no NetMap!

@@ -222,10 +222,10 @@ void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot){ // Printa a
     Celula_E* p;
     for(p=lista->prim;p != NULL;p = p->prox){
         if(p->prox == NULL){
-            fprintf(dot,"%s -- %s; ",rot->nome,p->rot->nome);
+            fprintf(dot,"    %s -- %s;\n",rot->nome,p->rot->nome);
             break;
         }
-        fprintf(dot,"%s -- %s; ",rot->nome,p->rot->nome);
+        fprintf(dot,"    %s -- %s;\n",rot->nome,p->rot->nome);
     }
 }
 
