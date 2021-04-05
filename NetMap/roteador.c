@@ -35,6 +35,59 @@ void setarListaEnlaces(Enlaces* lista1,Enlaces* lista2){
     lista1 = lista2;
 }
 
+void ConectaRoteadoresEnlaces(Roteador* rot1,Roteador* rot2){
+
+    Enlaces* listaEnlaces1 = retornaEnlaces(rot1);
+    Enlaces* listaEnlaces2 = retornaEnlaces(rot2);
+
+    Celula_E* nova1 = (Celula_E*)malloc(sizeof(Celula_E));
+    Celula_E* nova2 = (Celula_E*)malloc(sizeof(Celula_E));
+
+    adicionaRotCelE(nova1,rot1);
+    adicionaRotCelE(nova2,rot2);
+
+
+    adicionaProxCelE(nova1,NULL); // nova1->prox = NULL; 
+    
+    Celula_E* prim1 = retornaPrimEnlaces(listaEnlaces1);
+
+    
+    adicionaProxCelE(nova2,NULL); // nova2->prox = NULL; 
+
+    Celula_E* prim2 = retornaPrimEnlaces(listaEnlaces2);
+
+
+    // alocando a celula nova 1 na lista de enlaces 2
+    
+    if(prim2 != NULL){
+        
+        adicionaProxCelE(retornaUltEnlaces(listaEnlaces2),nova1); // listaEnlaces2 -> ult -> prox = nova1;
+       
+        adicionaUltEnlaces(nova1,listaEnlaces2); // listaEnlaces2 -> ult = nova1; 
+            
+    }
+    else{
+        
+        adicionaPrimEnlaces(nova1,listaEnlaces2); // listaEnlaces2->prim = nova1;
+        adicionaUltEnlaces(nova1,listaEnlaces2); //listaEnlaces2->ult = nova1; 
+    }
+
+        // alocando celula nova 2 na lista de enlaces 1
+
+    if(prim1 != NULL){
+        adicionaProxCelE(retornaUltEnlaces(listaEnlaces1),nova2); // listaEnlaces1 -> ult -> prox = nova2;
+       
+        adicionaUltEnlaces(nova2,listaEnlaces1); // listaEnlaces1 -> ult = nova2; 
+            
+    }
+    else{
+        adicionaPrimEnlaces(nova2,listaEnlaces1); // listaEnlaces1->prim = nova2;
+        adicionaUltEnlaces(nova2,listaEnlaces1); //listaEnlaces1->ult = nova2; 
+    }
+
+}
+
+
 Roteador* CriaRoteador(int id,char* nome,char* operadora){
     Roteador* rot = (Roteador*)malloc(sizeof(Roteador));
 
@@ -83,6 +136,7 @@ void ImprimeRoteador(Roteador* rot){
 }
 
 void LiberaRoteador(Roteador* rot){
+
     free(rot->nome);
     free(rot->operadora);
     free(rot);
@@ -254,20 +308,6 @@ size_t tamanhoCelE(){
     return sizeof(Celula_E);
 }
 
-void LiberaListaEnlaces(Enlaces* lista){ // Destroi a lista de roteadores
-    Celula_E* p = lista->prim;
-    Celula_E* t;
-
-    while(p!= NULL){
-        t = p->prox;
-        LiberaRoteador(p->rot);
-        free(p);
-        p = t;
-    }
-
-    free(lista);
-}
-
 int verificaVetorID(int id,int* vet, int *tam){
     for(int i=0;i<*tam;i++){
         if(vet[i] == id){
@@ -294,8 +334,10 @@ int verificaConexaoEnlaces(Roteador* rot1,Roteador* rot2,int* vetID,int* cont){
             if(verificaVetorID(rotP->id,vetID,cont)==0){ // verifica se o roteador ja foi analisado
                 *cont = *cont+1;
 
+
                 vetID = (int*)realloc(vetID, (*cont) * sizeof(int));
-                
+
+
                 vetID[*cont-1] = rot1->id; // grava o id do roteador 1
                 
                    
@@ -306,6 +348,8 @@ int verificaConexaoEnlaces(Roteador* rot1,Roteador* rot2,int* vetID,int* cont){
 
             }
         }
+
+       
         return 0;
     }
 }
@@ -315,8 +359,8 @@ void EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida, char* nomeTerm1
     
     int* vetID =(int*)calloc(tam,sizeof(int));
 
-    int idProcurado = rot2->id;
 
+    int idProcurado = rot2->id;
 
  
     if(verificaConexaoEnlaces(rot1,rot2,vetID,cont)){
@@ -326,5 +370,6 @@ void EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida, char* nomeTerm1
     }  
 
     free(vetID);
+
 
 } 

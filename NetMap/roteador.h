@@ -44,11 +44,11 @@ Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log, Roteado
 
 void ImprimeListaEnlaces(Enlaces* lista); // imprime a lista de enlaces de um roteador
 
-void LiberaListaEnlaces(Enlaces* lista); // libera a lista de enlaces de um roteador
-
 Roteador* CriaRoteador(int id,char* nome,char* operadora); // Cria um roteador novo
 
 Enlaces* retornaEnlaces(Roteador* rot); // retorna a lista dos enlaces do roteador
+
+void ConectaRoteadoresEnlaces(Roteador* rot1,Roteador* rot2);
 
 int retornaIdRot(Roteador* rot);// retorna o id do roteador
 
@@ -75,5 +75,7 @@ void EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida, char* nomeTerm1
 int analisaListaEnlaces(Roteador* rot, Enlaces* lista);
 
 int verificaVetorID(int id,int* vet, int* tam);
+
+void LiberaRoteadorEnlaces(Roteador* rot);
 
 #endif

@@ -18,6 +18,8 @@ ListaRot* CriaListaRot(); // cria a lista de roteadores
 
 size_t retornaSizeOfCelR();
 
+void LiberaListaEnlaces(ListaRot * lista);
+
 void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora);// Cadastra o roteador na lista de roteadores
 
 void RemoveRoteador(Celula_R* cel,ListaRot* listaR);// Remove o roteador da lista de roteadores
@@ -26,7 +28,7 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida); // Impr
 
 Roteador* retornaRot(Celula_R* cel); // retorna o roteador de uma celula R
 
-void ConectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2); // conecta dois roteadores
+Celula_R* retornaPrimRot(ListaRot* lista);
 
 void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log); // desconecta dois roteadores
 
@@ -39,6 +41,8 @@ int verificaRoteador(Celula_R* cel,ListaRot* lista); // verifica se o roteador e
 void LiberaListaRot(ListaRot* listaR);// Destroi a lista de roteadores
 
 void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot);
+
+void LiberaListaEnlaces(ListaRot * lista);
 
 
 #endif
