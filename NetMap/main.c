@@ -17,7 +17,7 @@ int main(){
  
     log = fopen("log.txt","w");
     saida = fopen("saida.txt","w");
-    dot = fopen("dot.txt","w");
+    dot = fopen("saida.dot","w");
     entrada = fopen("entrada.txt","r");
 
     if(entrada==NULL){
@@ -30,7 +30,6 @@ int main(){
     while(!feof(entrada)){
         le_e_executaComando(entrada,listaRot,listaTerm,log,&idRot,&idTerm,saida,dot);     
     }
-
     //fechando arquivos
     fclose(entrada);
     fclose(saida);

@@ -16,7 +16,7 @@ struct ListaDeTerminais{// Sentinela da lista de terminais
     Celula_T* ult;
 };
 
-ListaTerm* CriaListaTerm(){
+ListaTerm* CriaListaTerm(){ // Cria a lista de terminais
     ListaTerm* listaT = (ListaTerm*)malloc(sizeof(ListaTerm));
 
     listaT->prim = NULL;
@@ -25,7 +25,7 @@ ListaTerm* CriaListaTerm(){
     return listaT;
 }
 
-void CadastraTerminal(int id,char* nome,char* loc,ListaTerm* lista){
+void CadastraTerminal(int id,char* nome,char* loc,ListaTerm* lista){ //  Cadastra um terminal na lista de terminais
     Celula_T* nova = (Celula_T*)malloc(sizeof(Celula_T));
     
     nova->term = CriaTerminal(id,nome,loc);
@@ -48,7 +48,7 @@ Terminal* retornaTerm(Celula_T* cel){
     return cel->term;   
 }
 
-void ConectaTerminal(Celula_T* celT,Celula_R* celR){
+void ConectaTerminal(Celula_T* celT,Celula_R* celR){ // Conecta um terminal em uma celula R 
 
     Terminal* term = retornaTerm(celT);
 
@@ -62,7 +62,7 @@ void ConectaTerminal(Celula_T* celT,Celula_R* celR){
     
 }
 
-void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
+void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){ // Remove um terminal da lista de terminais
     Celula_T* p = listaT->prim;
     Celula_T* ant = NULL;
     int listaVazia = 1;
@@ -106,7 +106,7 @@ void RemoveTerminal(Celula_T* CelTerm,ListaTerm* listaT,FILE* log){
 
 
 
-void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
+void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){ // Printa a frequencia de terminais em uma localizacao
     int cont = 0;
     Celula_T* p = listaT->prim;
 
@@ -121,7 +121,7 @@ void FrequenciaTerminal(ListaTerm* listaT , char* loc,FILE* saida){
 
 }
 
-void DesconectaTerminal(Celula_T* cel){
+void DesconectaTerminal(Celula_T* cel){ // desconecta um terminal de uma celula R
 
     Terminal* term = retornaTerm(cel);
 
@@ -130,7 +130,7 @@ void DesconectaTerminal(Celula_T* cel){
 }
 
 
-void ImprimeListaTermDOT(ListaTerm* listaT, FILE* dot){
+void ImprimeListaTermDOT(ListaTerm* listaT, FILE* dot){ // imprime a lista de terminais no arquivo dot
     Celula_T* p;
 
     fprintf(dot,"strict graph {\n");
@@ -142,7 +142,7 @@ void ImprimeListaTermDOT(ListaTerm* listaT, FILE* dot){
 
 
 
-void ImprimeListaTerm(ListaTerm* listaT){
+void ImprimeListaTerm(ListaTerm* listaT){ // imprime a lista de terminais
     Celula_T* p;
     for(p=listaT->prim;p != NULL;p = p->prox){
         ImprimeTerminal(p->term);
@@ -150,7 +150,7 @@ void ImprimeListaTerm(ListaTerm* listaT){
 }
 
 
-Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
+Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){ // busca uma celula T em uma lista de terminais
     Celula_T* p;
     int existeTerm = 0;
     int listaVaziaT = 1;
@@ -173,7 +173,7 @@ Celula_T* buscaCelTerminal(char* nomeTerm,ListaTerm* lista, FILE* log){
 }
 
 
-void LiberaListaTerm(ListaTerm* listaT){
+void LiberaListaTerm(ListaTerm* listaT){ // libera uma lista de terminais
     Celula_T* p = listaT->prim;
     Celula_T* t;
     

@@ -78,4 +78,6 @@ int verificaVetorID(int id,int* vet, int* tam);
 
 void LiberaRoteadorEnlaces(Roteador* rot);
 
+void LiberaListaEnlaces(Roteador* rot);
+
 #endif

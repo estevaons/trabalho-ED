@@ -18,7 +18,7 @@ ListaRot* CriaListaRot(); // cria a lista de roteadores
 
 size_t retornaSizeOfCelR();
 
-void LiberaListaEnlaces(ListaRot * lista);
+void LiberaTodosEnlaces(ListaRot * lista);
 
 void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora);// Cadastra o roteador na lista de roteadores
 
@@ -42,7 +42,6 @@ void LiberaListaRot(ListaRot* listaR);// Destroi a lista de roteadores
 
 void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot);
 
-void LiberaListaEnlaces(ListaRot * lista);
 
 
 #endif

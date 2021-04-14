@@ -6,7 +6,7 @@
 #include "roteador.h"
 
 
-struct celula_e{
+struct celula_e{ // celula da lista de enlaces
     Celula_E* prox;
     Roteador* rot;
 };
@@ -17,7 +17,7 @@ struct enlaces{
     int *tamanho;
 };
 
-struct roteador{
+struct roteador{ 
     int id;
     char* nome;
     char* operadora;
@@ -31,11 +31,11 @@ Enlaces* retornaEnlaces(Roteador* rot){
 
 }
 
-void setarListaEnlaces(Enlaces* lista1,Enlaces* lista2){
+void setarListaEnlaces(Enlaces* lista1,Enlaces* lista2){ // iguala as listas de enlaces
     lista1 = lista2;
 }
 
-void ConectaRoteadoresEnlaces(Roteador* rot1,Roteador* rot2){
+void ConectaRoteadoresEnlaces(Roteador* rot1,Roteador* rot2){ // Adiciona um roteador na lista de enlaces de outro roteador e vice versa
 
     Enlaces* listaEnlaces1 = retornaEnlaces(rot1);
     Enlaces* listaEnlaces2 = retornaEnlaces(rot2);
@@ -88,7 +88,7 @@ void ConectaRoteadoresEnlaces(Roteador* rot1,Roteador* rot2){
 }
 
 
-Roteador* CriaRoteador(int id,char* nome,char* operadora){
+Roteador* CriaRoteador(int id,char* nome,char* operadora){ // cria um roteador
     Roteador* rot = (Roteador*)malloc(sizeof(Roteador));
 
     rot->id = id;
@@ -126,16 +126,11 @@ void adicionaUltEnlaces(Celula_E* cel,Enlaces* lista){
 }
 
 
-void ImprimeRoteadorDOT(Roteador* rot,FILE* dot){    
-   printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);  
-}
-
-
-void ImprimeRoteador(Roteador* rot){    
+void ImprimeRoteador(Roteador* rot){    // Imprime o roteador 
     printf("Nome do roteador: %s\nId do roteador: %d\nOperadora do roteador: %s\n",rot->nome,rot->id,rot->operadora);
 }
 
-void LiberaRoteador(Roteador* rot){
+void LiberaRoteador(Roteador* rot){ // Libera roteador
 
     free(rot->nome);
     free(rot->operadora);
@@ -162,7 +157,7 @@ Celula_E* retornaProxEnlaces(Celula_E* cel){
     return cel->prox;
 }
 
-int analisaListaEnlaces(Roteador* rot, Enlaces* lista){
+int analisaListaEnlaces(Roteador* rot, Enlaces* lista){ // verifica se um roteador esta em uma lista de enlaces
      Celula_E* p;  
 
     for(p=lista->prim;p!=NULL;p=p->prox){
@@ -175,7 +170,7 @@ int analisaListaEnlaces(Roteador* rot, Enlaces* lista){
 
 }
 
-Celula_E* verificaListaEnlaces(Roteador* rot,Enlaces* lista){
+Celula_E* verificaListaEnlaces(Roteador* rot,Enlaces* lista){ // retorna a celula E de um roteador em uma lista de enlaces
     Celula_E* p;  
 
     for(p=lista->prim;p!=NULL;p=p->prox){
@@ -188,7 +183,7 @@ Celula_E* verificaListaEnlaces(Roteador* rot,Enlaces* lista){
 
 }
 
-Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador* rot2){
+Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador* rot2){ // verifica e retorna a celula E de uma lista de enlaces
     int idRot = retornaIdRot(rot);
 
     Celula_E* p;
@@ -215,7 +210,7 @@ Celula_E* buscaRoteadorEnlaces(Roteador* rot, Enlaces* lista, FILE* log,Roteador
      }
 }
 
-Enlaces* criaListaEnlaces(){
+Enlaces* criaListaEnlaces(){ // cria uma lista de enlaces
     Enlaces* listaEnlaces = (Enlaces*)malloc(sizeof(Enlaces));
 
     listaEnlaces->prim = NULL;
@@ -230,7 +225,7 @@ Roteador* retornaRotEnlaces(Celula_E* cel){
     return cel->rot;
 }
 
-Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){
+Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){ // cadastra um roteador em uma lista de enlaces
     cel->prox = NULL;
 
 
@@ -252,7 +247,7 @@ Enlaces* CadastraRoteadorEnlaces(Enlaces* listaEnlaces,Celula_E* cel){
 
 
 
-void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){
+void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){ // remove um roteador de uma lista de enlaces
     Celula_E* p = lista->prim;
     Celula_E* ant = NULL;
 
@@ -279,13 +274,13 @@ void RemoveRoteadorEnlaces(Celula_E* cel,Enlaces* lista){
         ant->prox = p->prox;
     }
 
-    free(p);
+    //free(p);
 
 }
 
 
 
-void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot){ // Printa a lista de enlaces *******ANALISAR DNV temos que imprimir de tras pra frente
+void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot){ // Printa a lista de enlaces no arquivo DOT
     Celula_E* p;
     for(p=lista->prim;p != NULL;p = p->prox){
         if(p->prox == NULL){
@@ -297,7 +292,7 @@ void ImprimeListaEnlacesDOT(Enlaces* lista,FILE* dot,Roteador* rot){ // Printa a
 }
 
 
-void ImprimeListaEnlaces(Enlaces* lista){ // Printa a lista de enlaces *******ANALISAR DNV temos que imprimir de tras pra frente
+void ImprimeListaEnlaces(Enlaces* lista){ // Printa a lista de enlaces
     Celula_E* p;
     for(p=lista->prim;p != NULL;p = p->prox){
         ImprimeRoteador(p->rot);
@@ -308,7 +303,7 @@ size_t tamanhoCelE(){
     return sizeof(Celula_E);
 }
 
-int verificaVetorID(int id,int* vet, int *tam){
+int verificaVetorID(int id,int* vet, int *tam){ // verifica se o ID está no vetor
     for(int i=0;i<*tam;i++){
         if(vet[i] == id){
             return 1;
@@ -373,3 +368,17 @@ void EnviaPacotesDados(Roteador* rot1,Roteador* rot2,FILE*saida, char* nomeTerm1
 
 
 } 
+
+void LiberaListaEnlaces(Roteador* rot){ // libera a lista de enlaces
+    Enlaces* lista = rot->listaEnlaces;
+
+    Celula_E* q;
+    Celula_E* t;
+
+    for(q=lista->prim;q!=NULL;q = q->prox){
+        RemoveRoteadorEnlaces(q,lista);
+    }
+
+    // free(lista);
+   
+}

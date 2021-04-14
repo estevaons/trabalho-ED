@@ -25,7 +25,7 @@ Celula_R* retornaPrimRot(ListaRot* lista){
     return lista->prim;
 }
 
-void LiberaListaEnlaces(ListaRot * lista){ 
+void LiberaTodosEnlaces(ListaRot * lista){  // Libera todos os enlaces dos roteadores
     Celula_R* p = lista->prim;
     
     while(p !=NULL){
@@ -45,7 +45,7 @@ void LiberaListaEnlaces(ListaRot * lista){
     }
 }
 
-ListaRot* CriaListaRot(){
+ListaRot* CriaListaRot(){ // Cria a lista de Roteadores
     ListaRot* lista = (ListaRot*)malloc(sizeof(ListaRot));
 
     lista->prim = NULL;
@@ -57,7 +57,7 @@ ListaRot* CriaListaRot(){
 }
 
 
-int verificaRoteador(Celula_R* cel,ListaRot* lista){
+int verificaRoteador(Celula_R* cel,ListaRot* lista){ // Verifica se o roteador está na lista de roteadores
     Celula_R* p;
     int existe = 0;
     Roteador* rotProcurado = retornaRot(cel);
@@ -76,7 +76,7 @@ int verificaRoteador(Celula_R* cel,ListaRot* lista){
 
 
 
-void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){ // CERTO
+void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperadora){ // Cadastra um roteador na lista de roteadores
    
     Celula_R* nova = (Celula_R*)malloc(sizeof(Celula_R));
     
@@ -103,12 +103,12 @@ void CadastraRoteador(ListaRot* lista,int idRot,char* nomeRot,char* nomeOperador
 
 
 
-size_t retornaSizeOfCelR(){
+size_t retornaSizeOfCelR(){ // Retorna o tamanho da celula R
     return sizeof(Celula_R);
 }
 
 
-void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
+void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){ // Desconecta um roteador da lista de enlaces de outro roteador e vice-versa
 
     Roteador* rot1 = retornaRot(cel1);
     Roteador* rot2 = retornaRot(cel2);
@@ -133,7 +133,7 @@ void DesconectaRoteadoresEnlaces(Celula_R* cel1,Celula_R* cel2,FILE* log){
     
 }
 
-Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
+Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){ // busca um roteador na lista de roteadores
     Celula_R* p;
 
     int existeRot = 0;
@@ -156,7 +156,7 @@ Celula_R* buscaCelRot(char* nomeRot,ListaRot* lista, FILE* log){
         return NULL;   
     }
 }
-void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
+void RemoveRoteador(Celula_R* cel,ListaRot* listaR){ // remove um roteador da lista de roteadores, além de remover esse roteador da lista de enlaces dos demais
     Celula_R* p = listaR->prim;
     Celula_R* ant = NULL;
     int existeEnlaces = 0;
@@ -192,10 +192,6 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
         ant->prox = p->prox;            
     } 
 
-    /*printf("LISTA ENLACES ANTES DO ROT %s:\n",retornaNomeRot(rotCel)); // TESTE
-    ImprimeListaEnlaces(enlacesCelR);
-    printf("-------------------------------------------------------------------\n");  */
-
     // removendo o roteador removido da lista principal dos enlaces dos outros roteadores
 
     Celula_R* andaListaRot;
@@ -211,9 +207,13 @@ void RemoveRoteador(Celula_R* cel,ListaRot* listaR){
 
     }
 
-    free(enlacesCelR);
+    // Liberando o roteador removido e a lista de enlaces dele
 
-    free(p);
+    LiberaListaEnlaces(p->rot);
+
+    LiberaRoteador(p->rot);
+
+    //free(p);
 
 }
 
@@ -228,15 +228,13 @@ void FrequenciaOperadora(ListaRot* listaR,char* operadora, FILE* saida){ // Impr
         p = p->prox;
     }
 
-
-
     fprintf(saida,"FREQUENCIAOPERADORA %s: %d\n",operadora,cont);
 
 }
 
 
 
-void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot){ // Printa a lista de roteadores 
+void ImprimeListaRotDOT(ListaRot* listaR, FILE*dot){ // Printa a lista de roteadores no arquivo dot
     Celula_R* p;
     for(p=listaR->prim;p != NULL;p = p->prox){
         ImprimeListaEnlacesDOT(retornaEnlaces(p->rot),dot,p->rot);

@@ -11,7 +11,7 @@ struct terminal{
     Celula_R* rot;
 };
 
-Terminal* CriaTerminal(int id,char* nome,char* loc){
+Terminal* CriaTerminal(int id,char* nome,char* loc){ // cria um terminal
     Terminal* term = (Terminal*)malloc(sizeof(Terminal));
 
     term->id = id;
@@ -49,12 +49,9 @@ char* retornaLocTerm(Terminal* term){
     return term->loc;
 }
 
-void ImprimeTerminalDOT(Terminal* term, FILE* dot){
-
+void ImprimeTerminalDOT(Terminal* term, FILE* dot){ // imprime um terminal no arquivo DOT
     char* nome;
     Roteador* rot;
-
-   
 
     if(term->rot != NULL){
 
@@ -71,13 +68,10 @@ void ImprimeTerminalDOT(Terminal* term, FILE* dot){
 
 }
 
-
-
-void ImprimeTerminal(Terminal* term){ 
+void ImprimeTerminal(Terminal* term){ // imprime um terminal ( testes )
     char* nome;
     Roteador* rot;
 
-   
 
     if(term->rot != NULL){
 
@@ -96,7 +90,7 @@ void ImprimeTerminal(Terminal* term){
 
 }
 
-void LiberaTerminal(Terminal* term){
+void LiberaTerminal(Terminal* term){ // libera um terminal
 
     free(term->nome);
     free(term->loc);
